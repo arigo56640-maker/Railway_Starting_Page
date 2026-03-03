@@ -4,12 +4,12 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Serve static files from root (images, etc.)
-app.use(express.static(__dirname));
+// Serve static files from /public only
+app.use(express.static(path.join(__dirname, 'public')));
 
-// Serve index.html for all routes
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+// All routes → index.html
+app.use((req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 app.listen(PORT, () => {
