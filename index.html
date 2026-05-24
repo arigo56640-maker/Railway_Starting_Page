@@ -449,10 +449,12 @@ nav, main, footer, .mobile-overlay { position: relative; z-index: 2; }
 <section id="top" class="pt-8 pb-14 md:pt-14 md:pb-20 px-5 md:px-8">
 <div class="max-w-5xl mx-auto">
 
+  <div class="f-mono a1 mb-1" style="font-size:10px;color:var(--mocha);letter-spacing:.08em">בס״ד</div>
   <div class="coords a1 mb-8">
     <span>X: 31.7683°N</span>
     <span>Y: 35.2137°E</span>
     <span>JERUSALEM / IL</span>
+    <span id="il-date"></span>
   </div>
 
   <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-10 items-center">
@@ -487,8 +489,8 @@ nav, main, footer, .mobile-overlay { position: relative; z-index: 2; }
 
       <p class="f-serif a3 italic text-olive mt-5 leading-snug"
          style="font-size:clamp(17px,2.3vw,24px)">
-        עשור של ניסיון בשטח, בהקמת \ ההטמעת \ ויישום מערכות ממשלתיות ופרטיות,<br class="hidden md:block">
-        עם יכולת לשלב טכנולוגיות AI בתהליכים קיימים.
+        עשור של ניסיון בשטח, ביישום והטמעת פרויקטים של מערכות ממשלתיות ופרטיות, עבודה עם נתונים,<br class="hidden md:block">
+        ויכולת לשלב טכנולוגיות AI בתהליכים קיימים.
       </p>
 
       <div class="a5 mt-6 flex flex-col sm:flex-row gap-3">
@@ -908,6 +910,12 @@ nav, main, footer, .mobile-overlay { position: relative; z-index: 2; }
 
 
 <script>
+/* ── Date (Israel timezone) ── */
+(function() {
+  const d = new Date().toLocaleDateString('en-GB', { timeZone: 'Asia/Jerusalem', day: '2-digit', month: '2-digit', year: 'numeric' });
+  document.getElementById('il-date').textContent = d.replace(/\//g, '.');
+})();
+
 /* ── Mobile menu ── */
 const mmenu = document.getElementById('m-menu');
 const openB = document.getElementById('nav-open');
