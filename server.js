@@ -14,6 +14,7 @@ app.get('/profile.jpg', (req, res) => res.sendFile(path.join(__dirname, 'profile
 app.get('/profile2.png', (req, res) => res.sendFile(path.join(__dirname, 'profile2.png')));
 app.get('/profile3.png', (req, res) => res.sendFile(path.join(__dirname, 'profile3.png')));
 app.get('/profile4.png', (req, res) => res.sendFile(path.join(__dirname, 'profile4.png')));
+app.get('/profile5.png', (req, res) => res.sendFile(path.join(__dirname, 'profile5.png')));
 app.use('/Certificate', express.static(path.join(__dirname, 'Certificate')));
 
 // Catch-all → index.html
