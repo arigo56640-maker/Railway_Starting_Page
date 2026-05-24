@@ -29,7 +29,7 @@ tailwind.config = {
 <style>
 /* ─── RESET & BASE ─── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; font-size: 16px; }
+html { scroll-behavior: smooth; font-size: 22px; }
 body {
   font-family: 'Assistant', sans-serif;
   background: #F2EAD9;
@@ -111,7 +111,7 @@ nav, main, footer, .mobile-overlay { position: relative; z-index: 2; }
 .sec-lbl {
   display: inline-flex; align-items: center; gap: 10px;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 10.5px; letter-spacing: .16em;
+  font-size: 12.5px; letter-spacing: .16em;
   color: var(--olive); text-transform: uppercase;
 }
 
@@ -119,7 +119,7 @@ nav, main, footer, .mobile-overlay { position: relative; z-index: 2; }
 .pill {
   display: inline-flex; align-items: center; gap: 9px;
   border: 1px solid var(--olive); padding: 7px 16px;
-  font-family: 'JetBrains Mono', monospace; font-size: 10.5px;
+  font-family: 'JetBrains Mono', monospace; font-size: 12.5px;
   color: var(--olive); background: rgba(242,234,217,.65);
   backdrop-filter: blur(8px); letter-spacing: .07em;
 }
@@ -127,7 +127,7 @@ nav, main, footer, .mobile-overlay { position: relative; z-index: 2; }
 /* ─── COORDS ─── */
 .coords {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 10.5px; color: var(--terra); letter-spacing: .1em;
+  font-size: 12.5px; color: var(--terra); letter-spacing: .1em;
   display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
 }
 .coords span::before { content: '◆ '; }
@@ -180,14 +180,14 @@ nav, main, footer, .mobile-overlay { position: relative; z-index: 2; }
   background: rgba(28,36,24,.84);
   backdrop-filter: blur(10px);
   font-family: 'JetBrains Mono', monospace;
-  font-size: 10.5px; color: var(--cream);
+  font-size: 12.5px; color: var(--cream);
   letter-spacing: .06em; z-index: 2;
 }
 .portrait-meta {
   display: flex; justify-content: space-between; align-items: center;
   padding: 9px 2px 0;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 9.5px; color: var(--olive);
+  font-size: 11px; color: var(--olive);
   letter-spacing: .08em;
 }
 .portrait-float {
@@ -198,7 +198,7 @@ nav, main, footer, .mobile-overlay { position: relative; z-index: 2; }
   border: 1px solid rgba(212,162,76,.4);
   border-radius: 999px;
   font-family: 'Assistant', sans-serif;
-  font-size: 12px; font-weight: 600;
+  font-size: 14px; font-weight: 600;
   color: var(--cream);
   white-space: nowrap;
   box-shadow: 0 4px 18px rgba(28,36,24,.35);
@@ -226,7 +226,7 @@ nav, main, footer, .mobile-overlay { position: relative; z-index: 2; }
 /* ─── BUTTONS ─── */
 .btn-p {
   background: var(--ink); color: var(--cream);
-  padding: 13px 22px; font-weight: 700; font-size: 14px;
+  padding: 13px 22px; font-weight: 700; font-size: 16px;
   display: inline-flex; align-items: center; justify-content: center; gap: 8px;
   border: 1.5px solid var(--ink);
   transition: background .22s, border-color .22s, transform .22s, box-shadow .22s;
@@ -236,7 +236,7 @@ nav, main, footer, .mobile-overlay { position: relative; z-index: 2; }
 .btn-o {
   background: transparent; color: var(--ink);
   border: 1.5px solid var(--ink); padding: 13px 22px;
-  font-weight: 700; font-size: 14px;
+  font-weight: 700; font-size: 16px;
   display: inline-flex; align-items: center; justify-content: center;
   transition: background .22s, color .22s;
 }
@@ -309,7 +309,7 @@ nav, main, footer, .mobile-overlay { position: relative; z-index: 2; }
 .cert-card img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; }
 .cert-lbl {
   padding: 8px 11px;
-  font-family: 'JetBrains Mono', monospace; font-size: 9.5px;
+  font-family: 'JetBrains Mono', monospace; font-size: 11px;
   color: var(--olive); letter-spacing: .05em;
   border-top: 1px solid rgba(74,107,92,.12);
 }
@@ -324,11 +324,11 @@ nav, main, footer, .mobile-overlay { position: relative; z-index: 2; }
   transition: transform .28s ease, border-color .28s ease, box-shadow .28s ease;
 }
 .proj-card:hover { transform: translateY(-4px); border-color: var(--terra); box-shadow: 0 10px 36px rgba(200,85,61,.16); }
-.proj-num { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: rgba(200,85,61,.45); letter-spacing: .12em; margin-bottom: 10px; }
+.proj-num { font-family: 'JetBrains Mono', monospace; font-size: 12.5px; color: rgba(200,85,61,.45); letter-spacing: .12em; margin-bottom: 10px; }
 .tag {
   display: inline-block;
   background: rgba(74,107,92,.1); color: var(--olive);
-  font-size: 10.5px; font-weight: 600;
+  font-size: 12.5px; font-weight: 600;
   padding: 3px 10px; border-radius: 999px;
   margin: 3px 3px 3px 0;
 }
@@ -357,7 +357,7 @@ nav, main, footer, .mobile-overlay { position: relative; z-index: 2; }
 .mobile-overlay.open { transform: translateY(0); }
 
 /* ─── NAV LINK UNDERLINE ─── */
-.nav-link { position: relative; padding-bottom: 2px; font-weight: 600; font-size: 14px; }
+.nav-link { position: relative; padding-bottom: 2px; font-weight: 600; font-size: 16px; }
 .nav-link::after {
   content: ''; position: absolute; bottom: 0; inset-inline-start: 0;
   width: 100%; height: 1px; background: var(--terra);
@@ -380,6 +380,39 @@ nav, main, footer, .mobile-overlay { position: relative; z-index: 2; }
 .a3 { animation: fadeUp .85s ease .38s both; }
 .a4 { animation: fadeUp .85s ease .55s both; }
 .a5 { animation: fadeUp .85s ease .72s both; }
+
+/* ─── SKILLS TICKER ─── */
+@keyframes ticker-scroll {
+  0%   { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+.ticker-wrap { overflow: hidden; user-select: none; }
+.ticker-track {
+  display: flex; align-items: center;
+  width: max-content;
+  animation: ticker-scroll 36s linear infinite;
+}
+.ticker-track:hover { animation-play-state: paused; }
+.ticker-item {
+  display: inline-flex; align-items: center; gap: 11px;
+  flex-direction: row-reverse;
+  direction: rtl;
+  padding: 14px 30px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13.5px; font-weight: 500; letter-spacing: .04em;
+  color: var(--ink); white-space: nowrap;
+}
+.ticker-ico {
+  width: 32px; height: 32px; border-radius: 8px;
+  background: linear-gradient(135deg, var(--terra), var(--ochre));
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 16px; flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(200,85,61,.25);
+}
+.ticker-div {
+  color: var(--terra); opacity: .35;
+  font-size: 11px; flex-shrink: 0; padding: 0 2px;
+}
 
 /* ─── LIGHTBOX ─── */
 #lb {
@@ -412,12 +445,12 @@ nav, main, footer, .mobile-overlay { position: relative; z-index: 2; }
 <!-- ══════ NAV ══════ -->
 <nav class="sticky top-0 z-50 border-b border-olive/20" style="background:rgba(242,234,217,.9);backdrop-filter:blur(14px)">
   <div class="max-w-5xl mx-auto px-5 h-16 flex items-center justify-between">
-    <a href="#top" class="f-serif text-xl font-bold blink tracking-tight" style="letter-spacing:-.01em">אריה גולדמן</a>
+    <a href="#top" class="f-serif text-xl font-bold tracking-tight" dir="ltr" style="letter-spacing:-.01em">Goldman Arie <span class="blink"></span> גולדמן אריה</a>
     <div class="hidden md:flex items-center gap-8">
       <a href="#about"      class="nav-link">אודות</a>
       <a href="#experience" class="nav-link">ניסיון</a>
       <a href="#projects"   class="nav-link">פרויקטים</a>
-      <a href="#contact"    class="btn-p" style="padding:10px 18px;font-size:13px">בואו נדבר ←</a>
+      <a href="#contact"    class="btn-p" style="padding:10px 18px;font-size:15px">בואו נדבר ←</a>
     </div>
     <button id="nav-open" class="md:hidden w-10 h-10 flex items-center justify-center bg-ink text-cream rounded-md" aria-label="תפריט">
       <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
@@ -430,7 +463,7 @@ nav, main, footer, .mobile-overlay { position: relative; z-index: 2; }
 <!-- ══════ MOBILE MENU ══════ -->
 <div id="m-menu" class="mobile-overlay fixed inset-0 z-40 bg-cream flex flex-col">
   <div class="h-16 px-5 flex items-center justify-between border-b border-olive/20">
-    <span class="f-serif text-xl font-bold blink">אריה גולדמן</span>
+    <span class="f-serif text-xl font-bold" dir="ltr">Goldman Arie <span class="blink"></span> גולדמן אריה</span>
     <button id="nav-close" class="w-10 h-10 flex items-center justify-center bg-ink text-cream rounded-md text-lg">✕</button>
   </div>
   <div class="flex-1 flex flex-col justify-center px-8 gap-0.5">
@@ -449,7 +482,7 @@ nav, main, footer, .mobile-overlay { position: relative; z-index: 2; }
 <section id="top" class="pt-8 pb-14 md:pt-14 md:pb-20 px-5 md:px-8">
 <div class="max-w-5xl mx-auto">
 
-  <div class="f-mono a1 mb-1" style="font-size:10px;color:var(--mocha);letter-spacing:.08em">בס״ד</div>
+  <div class="f-mono a1 mb-1" style="font-size:12px;color:var(--mocha);letter-spacing:.08em">בס״ד</div>
   <div class="coords a1 mb-8">
     <span>X: 31.7683°N</span>
     <span>Y: 35.2137°E</span>
@@ -482,15 +515,15 @@ nav, main, footer, .mobile-overlay { position: relative; z-index: 2; }
     <div class="md:col-span-7 md:order-1 order-2">
 
       <h1 class="f-serif a2 leading-[1.0] font-bold tracking-tight"
-          style="font-size:clamp(38px,7vw,80px);letter-spacing:-.025em">
+          style="font-size:clamp(54px,9vw,110px);letter-spacing:-.025em">
         מומחה מערכות <span class="grad font-black">ERP</span><br>
         ושימוש בכלי <span class="text-olive italic" style="font-weight:400">AI</span> מגוונים.
       </h1>
 
       <p class="f-serif a3 italic text-olive mt-5 leading-snug"
-         style="font-size:clamp(17px,2.3vw,24px)">
-        עשור של ניסיון בשטח, ביישום והטמעת פרויקטים של מערכות ממשלתיות ופרטיות, עבודה עם נתונים,<br class="hidden md:block">
-        ויכולת לשלב טכנולוגיות AI בתהליכים קיימים.
+         style="font-size:clamp(23px,3vw,32px)">
+        עשור של יישום, הטמעה ותחזוקת מערכות — ממשרד האוצר ועד משטרת ישראל.<br class="hidden md:block">
+        מנתח נתונים, משפר תהליכים, ומשלב AI שעושה קסמים.
       </p>
 
       <div class="a5 mt-6 flex flex-col sm:flex-row gap-3">
@@ -501,27 +534,42 @@ nav, main, footer, .mobile-overlay { position: relative; z-index: 2; }
     </div>
   </div>
 
-  <!-- ── STATS STRIP ── -->
-  <div class="mt-14 md:mt-20 grid grid-cols-2 md:grid-cols-4 gap-px bg-olive/20 border border-olive/20 a5">
-    <div class="bg-cream/75 backdrop-blur p-5 relative">
-      <span class="absolute top-2 right-2 f-mono text-[9px] text-terra">// 01</span>
-      <div class="f-mono text-4xl font-bold text-terra">10</div>
-      <div class="f-mono text-[9px] text-olive mt-2 tracking-widest">שנות ERP</div>
-    </div>
-    <div class="bg-cream/75 backdrop-blur p-5 relative">
-      <span class="absolute top-2 right-2 f-mono text-[9px] text-terra">// 02</span>
-      <div class="f-mono text-4xl font-bold text-ochre">06</div>
-      <div class="f-mono text-[9px] text-olive mt-2 tracking-widest">ארגונים</div>
-    </div>
-    <div class="bg-cream/75 backdrop-blur p-5 relative">
-      <span class="absolute top-2 right-2 f-mono text-[9px] text-terra">// 03</span>
-      <div class="f-mono text-4xl font-bold text-olive">03</div>
-      <div class="f-mono text-[9px] text-olive mt-2 tracking-widest">פרויקטי AI</div>
-    </div>
-    <div class="bg-cream/75 backdrop-blur p-5 relative">
-      <span class="absolute top-2 right-2 f-mono text-[9px] text-terra">// 04</span>
-      <div class="f-mono text-4xl font-bold text-ink">05</div>
-      <div class="f-mono text-[9px] text-olive mt-2 tracking-widest">תעודות</div>
+  <!-- ── SKILLS TICKER ── -->
+  <div class="mt-14 md:mt-20 a5 ticker-wrap border border-olive/20" dir="ltr" style="background:rgba(237,227,206,.6);backdrop-filter:blur(10px)">
+    <div class="ticker-track" dir="ltr">
+      <span class="ticker-item"><span class="ticker-ico">📊</span>מומחה Excel</span>
+      <span class="ticker-div">◆</span>
+      <span class="ticker-item"><span class="ticker-ico">⚙️</span>בניית אוטומציות</span>
+      <span class="ticker-div">◆</span>
+      <span class="ticker-item"><span class="ticker-ico">🗄️</span>SAP</span>
+      <span class="ticker-div">◆</span>
+      <span class="ticker-item"><span class="ticker-ico">🔧</span>יישום מערכות</span>
+      <span class="ticker-div">◆</span>
+      <span class="ticker-item"><span class="ticker-ico">📈</span>בניית דשבורדים</span>
+      <span class="ticker-div">◆</span>
+      <span class="ticker-item"><span class="ticker-ico">🏛️</span>פרויקטים ממשלתיים</span>
+      <span class="ticker-div">◆</span>
+      <span class="ticker-item"><span class="ticker-ico">💾</span>SQL מתקדם</span>
+      <span class="ticker-div">◆</span>
+      <span class="ticker-item"><span class="ticker-ico">🤖</span>שילוב AI</span>
+      <span class="ticker-div">◆</span>
+      <!-- duplicate for seamless loop -->
+      <span class="ticker-item" aria-hidden="true"><span class="ticker-ico">📊</span>מומחה Excel</span>
+      <span class="ticker-div" aria-hidden="true">◆</span>
+      <span class="ticker-item" aria-hidden="true"><span class="ticker-ico">⚙️</span>בניית אוטומציות</span>
+      <span class="ticker-div" aria-hidden="true">◆</span>
+      <span class="ticker-item" aria-hidden="true"><span class="ticker-ico">🗄️</span>SAP</span>
+      <span class="ticker-div" aria-hidden="true">◆</span>
+      <span class="ticker-item" aria-hidden="true"><span class="ticker-ico">🔧</span>יישום מערכות</span>
+      <span class="ticker-div" aria-hidden="true">◆</span>
+      <span class="ticker-item" aria-hidden="true"><span class="ticker-ico">📈</span>בניית דשבורדים</span>
+      <span class="ticker-div" aria-hidden="true">◆</span>
+      <span class="ticker-item" aria-hidden="true"><span class="ticker-ico">🏛️</span>פרויקטים ממשלתיים</span>
+      <span class="ticker-div" aria-hidden="true">◆</span>
+      <span class="ticker-item" aria-hidden="true"><span class="ticker-ico">💾</span>SQL מתקדם</span>
+      <span class="ticker-div" aria-hidden="true">◆</span>
+      <span class="ticker-item" aria-hidden="true"><span class="ticker-ico">🤖</span>שילוב AI</span>
+      <span class="ticker-div" aria-hidden="true">◆</span>
     </div>
   </div>
 
@@ -537,18 +585,21 @@ nav, main, footer, .mobile-overlay { position: relative; z-index: 2; }
 
   <div class="md:col-span-4 reveal">
     <div class="sec-lbl mb-5"><span class="dot"></span>01 · אודות</div>
-    <div class="f-mono text-7xl font-bold text-terra leading-none select-none">01</div>
-    <div class="f-mono text-[9px] text-olive tracking-widest mt-2">ABOUT.ME</div>
+    <svg width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="var(--terra)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" class="mt-2">
+      <circle cx="12" cy="8" r="4"/>
+      <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+    </svg>
+    <div class="f-mono text-[11px] text-olive tracking-widest mt-3">ABOUT.ME</div>
   </div>
 
   <div class="md:col-span-8 reveal reveal-d1 space-y-5">
     <p class="f-serif text-xl md:text-2xl font-medium text-ink leading-snug">
       מהנדס תעשיה וניהול עם עשור של ניסיון ביישום מערכות ERP בארגונים ממשלתיים וציבוריים.
     </p>
-    <p class="text-[15.5px] leading-relaxed text-ink/80">
+    <p class="text-[18px] leading-relaxed text-ink/80">
       התמחיתי בהטמעת SAP מרכב״ה במשרד האוצר, SAP B1 בחברת זיו מערכות, ובמערכות ליבה עבור חברת הגיחון ומשטרת ישראל — כל פרויקט עם האתגרים, הלו״ז ורגישויות הנתונים שלו.
     </p>
-    <p class="text-[15.5px] leading-relaxed text-ink/80">
+    <p class="text-[18px] leading-relaxed text-ink/80">
       בשנים האחרונות אני מגשר בין הידע הארגוני העמוק לכלי הבינה המלאכותית: בניתי מערכת RAG בעברית, סוכנים אוטונומיים ופלטפורמת תרגום. אני לא "מהנדס AI גנרי" — אני מבין את הצד הארגוני, ולכן יודע איפה AI באמת עוזר.
     </p>
     <div class="flex items-center gap-3 pt-1">
@@ -577,10 +628,10 @@ nav, main, footer, .mobile-overlay { position: relative; z-index: 2; }
     <div class="card reveal reveal-d1">
       <div class="flex justify-between items-start mb-5">
         <div class="ico">🗄️</div>
-        <span class="f-mono text-[10px] text-terra">// 01</span>
+        <span class="f-mono text-[12px] text-terra">// 01</span>
       </div>
       <h3 class="f-serif text-2xl font-bold">מערכות ERP</h3>
-      <p class="text-mocha mt-3 text-[13.5px] leading-relaxed">
+      <p class="text-mocha mt-3 text-[16px] leading-relaxed">
         SAP מרכב״ה · SAP B1 · CRM Dynamics 365 · ניהול תהליכים עסקיים בסביבות ממשלתיות ומסחריות.
       </p>
     </div>
@@ -588,10 +639,10 @@ nav, main, footer, .mobile-overlay { position: relative; z-index: 2; }
     <div class="card reveal reveal-d2">
       <div class="flex justify-between items-start mb-5">
         <div class="ico">✨</div>
-        <span class="f-mono text-[10px] text-terra">// 02</span>
+        <span class="f-mono text-[12px] text-terra">// 02</span>
       </div>
       <h3 class="f-serif text-2xl font-bold">שילוב AI</h3>
-      <p class="text-mocha mt-3 text-[13.5px] leading-relaxed">
+      <p class="text-mocha mt-3 text-[16px] leading-relaxed">
         RAG בעברית · סוכנים אוטונומיים · תרגום חכם · Claude API · Python · Prompt Engineering.
       </p>
     </div>
@@ -599,10 +650,10 @@ nav, main, footer, .mobile-overlay { position: relative; z-index: 2; }
     <div class="card reveal reveal-d3">
       <div class="flex justify-between items-start mb-5">
         <div class="ico">📊</div>
-        <span class="f-mono text-[10px] text-terra">// 03</span>
+        <span class="f-mono text-[12px] text-terra">// 03</span>
       </div>
       <h3 class="f-serif text-2xl font-bold">דאטה ואוטומציה</h3>
-      <p class="text-mocha mt-3 text-[13.5px] leading-relaxed">
+      <p class="text-mocha mt-3 text-[16px] leading-relaxed">
         SQL מתקדם · Power BI · ETL · אינטגרציות · אוטומציה של תהליכים חוצי-מערכות.
       </p>
     </div>
@@ -628,7 +679,7 @@ nav, main, footer, .mobile-overlay { position: relative; z-index: 2; }
     <div class="exp-row">
       <div>
         <h3 class="f-serif text-xl font-bold">אזרח על תקן קצין טכנולוגי — מחלקת תקציבים</h3>
-        <p class="text-olive font-semibold mt-0.5 text-[14.5px]">משטרת ישראל</p>
+        <p class="text-olive font-semibold mt-0.5 text-[17px]">משטרת ישראל</p>
       </div>
       <div class="f-mono text-xs text-terra shrink-0 pt-1" dir="ltr">2024 – 2025</div>
     </div>
@@ -636,7 +687,7 @@ nav, main, footer, .mobile-overlay { position: relative; z-index: 2; }
     <div class="exp-row">
       <div>
         <h3 class="f-serif text-xl font-bold">יישום ותחזוקת מערכת SAP B1</h3>
-        <p class="text-olive font-semibold mt-0.5 text-[14.5px]">חברת זיו מערכות</p>
+        <p class="text-olive font-semibold mt-0.5 text-[17px]">חברת זיו מערכות</p>
       </div>
       <div class="f-mono text-xs text-terra shrink-0 pt-1" dir="ltr">2021 – 2023</div>
     </div>
@@ -644,7 +695,7 @@ nav, main, footer, .mobile-overlay { position: relative; z-index: 2; }
     <div class="exp-row">
       <div>
         <h3 class="f-serif text-xl font-bold">יישום, תמיכה והטמעת מערכת הליבה</h3>
-        <p class="text-olive font-semibold mt-0.5 text-[14.5px]">חברת הגיחון</p>
+        <p class="text-olive font-semibold mt-0.5 text-[17px]">חברת הגיחון</p>
       </div>
       <div class="f-mono text-xs text-terra shrink-0 pt-1" dir="ltr">2020 – 2021</div>
     </div>
@@ -652,7 +703,7 @@ nav, main, footer, .mobile-overlay { position: relative; z-index: 2; }
     <div class="exp-row">
       <div>
         <h3 class="f-serif text-xl font-bold">אחראי מערכת אגף שיקום (מנתח מערכות)</h3>
-        <p class="text-olive font-semibold mt-0.5 text-[14.5px]">משרד הבריאות</p>
+        <p class="text-olive font-semibold mt-0.5 text-[17px]">משרד הבריאות</p>
       </div>
       <div class="f-mono text-xs text-terra shrink-0 pt-1" dir="ltr">2018 – 2020</div>
     </div>
@@ -660,7 +711,7 @@ nav, main, footer, .mobile-overlay { position: relative; z-index: 2; }
     <div class="exp-row">
       <div>
         <h3 class="f-serif text-xl font-bold">תומך ומטמיע SAP מרכב״ה</h3>
-        <p class="text-olive font-semibold mt-0.5 text-[14.5px]">משרד האוצר</p>
+        <p class="text-olive font-semibold mt-0.5 text-[17px]">משרד האוצר</p>
       </div>
       <div class="f-mono text-xs text-terra shrink-0 pt-1" dir="ltr">2013 – 2017</div>
     </div>
@@ -668,7 +719,7 @@ nav, main, footer, .mobile-overlay { position: relative; z-index: 2; }
     <div class="exp-row">
       <div>
         <h3 class="f-serif text-xl font-bold">שירות צבאי — חיל המודיעין</h3>
-        <p class="text-olive font-semibold mt-0.5 text-[14.5px]">
+        <p class="text-olive font-semibold mt-0.5 text-[17px]">
           יחידת 8200 · <span class="text-terra">תעודת הצטיינות</span>
         </p>
       </div>
@@ -695,7 +746,7 @@ nav, main, footer, .mobile-overlay { position: relative; z-index: 2; }
 
     <!-- Degrees -->
     <div class="reveal">
-      <div class="f-mono text-[9.5px] text-olive tracking-widest mb-6">// תארים אקדמיים</div>
+      <div class="f-mono text-[12px] text-olive tracking-widest mb-6">// תארים אקדמיים</div>
       <div class="edu-block">
         <div class="f-mono text-xs text-terra" dir="ltr">2008 – 2012</div>
         <div class="f-serif text-lg font-bold mt-1">B.Sc הנדסת תעשיה וניהול</div>
@@ -710,7 +761,14 @@ nav, main, footer, .mobile-overlay { position: relative; z-index: 2; }
 
     <!-- Courses -->
     <div class="reveal reveal-d1">
-      <div class="f-mono text-[9.5px] text-olive tracking-widest mb-6">// קורסים</div>
+      <div class="f-mono text-[12px] text-olive tracking-widest mb-6">// קורסים</div>
+      <div class="course-row">
+        <div>
+          <div class="font-semibold">פיתוח מערכות מבוססות AI</div>
+          <div class="text-sm text-mocha">האוניברסיטה העברית</div>
+        </div>
+        <div class="f-mono text-xs text-terra shrink-0">2026</div>
+      </div>
       <div class="course-row">
         <div>
           <div class="font-semibold">קורס בינה מלאכותית (AI)</div>
@@ -880,15 +938,15 @@ nav, main, footer, .mobile-overlay { position: relative; z-index: 2; }
     </h2>
     <div class="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-2xl reveal">
       <a href="mailto:goldmanarie@gmail.com" class="c-link">
-        <div class="f-mono text-[9.5px] text-ochre tracking-widest">// מייל</div>
+        <div class="f-mono text-[12px] text-ochre tracking-widest">// מייל</div>
         <div class="f-serif font-bold text-base mt-1.5 break-all">goldmanarie@gmail.com</div>
       </a>
       <a href="tel:+972545320855" class="c-link">
-        <div class="f-mono text-[9.5px] text-ochre tracking-widest">// טלפון</div>
+        <div class="f-mono text-[12px] text-ochre tracking-widest">// טלפון</div>
         <div class="f-serif font-bold text-lg mt-1.5 f-mono" dir="ltr">054-5320855</div>
       </a>
       <a href="https://www.linkedin.com/in/arie-goldman-12a737204" target="_blank" rel="noopener" class="c-link">
-        <div class="f-mono text-[9.5px] text-ochre tracking-widest">// לינקדאין</div>
+        <div class="f-mono text-[12px] text-ochre tracking-widest">// לינקדאין</div>
         <div class="f-serif font-bold text-base mt-1.5">פרופיל LinkedIn ←</div>
       </a>
     </div>
@@ -897,11 +955,50 @@ nav, main, footer, .mobile-overlay { position: relative; z-index: 2; }
 
 </main>
 
+<!-- ══════ FOOTER TICKER ══════ -->
+<div class="ticker-wrap border-t border-olive/20" dir="ltr" style="background:rgba(237,227,206,.6);backdrop-filter:blur(10px)">
+  <div class="ticker-track" style="animation-direction:reverse">
+    <span class="ticker-item"><span class="ticker-ico">📊</span>מומחה Excel</span>
+    <span class="ticker-div">◆</span>
+    <span class="ticker-item"><span class="ticker-ico">⚙️</span>בניית אוטומציות</span>
+    <span class="ticker-div">◆</span>
+    <span class="ticker-item"><span class="ticker-ico">🗄️</span>SAP</span>
+    <span class="ticker-div">◆</span>
+    <span class="ticker-item"><span class="ticker-ico">🔧</span>יישום מערכות</span>
+    <span class="ticker-div">◆</span>
+    <span class="ticker-item"><span class="ticker-ico">📈</span>בניית דשבורדים</span>
+    <span class="ticker-div">◆</span>
+    <span class="ticker-item"><span class="ticker-ico">🏛️</span>פרויקטים ממשלתיים</span>
+    <span class="ticker-div">◆</span>
+    <span class="ticker-item"><span class="ticker-ico">💾</span>SQL מתקדם</span>
+    <span class="ticker-div">◆</span>
+    <span class="ticker-item"><span class="ticker-ico">🤖</span>שילוב AI</span>
+    <span class="ticker-div">◆</span>
+    <!-- duplicate for seamless loop -->
+    <span class="ticker-item" aria-hidden="true"><span class="ticker-ico">📊</span>מומחה Excel</span>
+    <span class="ticker-div" aria-hidden="true">◆</span>
+    <span class="ticker-item" aria-hidden="true"><span class="ticker-ico">⚙️</span>בניית אוטומציות</span>
+    <span class="ticker-div" aria-hidden="true">◆</span>
+    <span class="ticker-item" aria-hidden="true"><span class="ticker-ico">🗄️</span>SAP</span>
+    <span class="ticker-div" aria-hidden="true">◆</span>
+    <span class="ticker-item" aria-hidden="true"><span class="ticker-ico">🔧</span>יישום מערכות</span>
+    <span class="ticker-div" aria-hidden="true">◆</span>
+    <span class="ticker-item" aria-hidden="true"><span class="ticker-ico">📈</span>בניית דשבורדים</span>
+    <span class="ticker-div" aria-hidden="true">◆</span>
+    <span class="ticker-item" aria-hidden="true"><span class="ticker-ico">🏛️</span>פרויקטים ממשלתיים</span>
+    <span class="ticker-div" aria-hidden="true">◆</span>
+    <span class="ticker-item" aria-hidden="true"><span class="ticker-ico">💾</span>SQL מתקדם</span>
+    <span class="ticker-div" aria-hidden="true">◆</span>
+    <span class="ticker-item" aria-hidden="true"><span class="ticker-ico">🤖</span>שילוב AI</span>
+    <span class="ticker-div" aria-hidden="true">◆</span>
+  </div>
+</div>
+
 <!-- ══════ FOOTER ══════ -->
-<footer style="background:#1C2418;color:rgba(242,234,217,.5);border-top:1px solid rgba(242,234,217,.07);padding:24px 20px">
+<footer style="background:#F2EAD9;color:rgba(28,36,24,.45);border-top:1px solid rgba(74,107,92,.15);padding:24px 20px">
   <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
     <span class="f-mono text-xs">© 2026 אריה גולדמן · goldmanarie.com</span>
-    <div class="flex items-center gap-2 f-mono text-xs" style="color:rgba(242,234,217,.3)">
+    <div class="flex items-center gap-2 f-mono text-xs" style="color:rgba(28,36,24,.3)">
       <span class="dot gold" style="width:5px;height:5px;animation:none;box-shadow:none;background:#D4A24C;opacity:.7"></span>
       SYS://ARIE.OS · v2026.05
     </div>
