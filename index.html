@@ -317,13 +317,15 @@ nav, main, footer, .mobile-overlay { position: relative; z-index: 2; }
 /* ─── PROJECT CARD ─── */
 .proj-card {
   display: block;
-  border: 1px solid rgba(74,107,92,.2);
+  border: 1px solid rgba(74,107,92,.25);
+  border-top: 3px solid var(--olive);
   border-radius: 16px; padding: 22px;
   background: rgba(242,234,217,.55);
   backdrop-filter: blur(10px);
-  transition: transform .28s ease, border-color .28s ease, box-shadow .28s ease;
+  box-shadow: 0 2px 20px rgba(28,36,24,.06);
+  transition: transform .28s ease, border-color .28s ease, border-top-color .28s ease, box-shadow .28s ease;
 }
-.proj-card:hover { transform: translateY(-4px); border-color: var(--terra); box-shadow: 0 10px 36px rgba(200,85,61,.16); }
+.proj-card:hover { transform: translateY(-4px); border-top-color: var(--terra); box-shadow: 0 10px 36px rgba(200,85,61,.16); }
 .proj-num { font-family: 'JetBrains Mono', monospace; font-size: 12.5px; color: rgba(200,85,61,.45); letter-spacing: .12em; margin-bottom: 10px; }
 .tag {
   display: inline-block;
@@ -343,11 +345,13 @@ nav, main, footer, .mobile-overlay { position: relative; z-index: 2; }
 /* ─── CONTACT DARK ─── */
 .c-link {
   display: block; padding: 15px 18px;
-  border: 1px solid rgba(242,234,217,.12);
-  border-radius: 12px;
-  transition: border-color .22s ease, background .22s ease;
+  border: 1px solid rgba(74,107,92,.2);
+  border-radius: 16px;
+  background: rgba(242,234,217,.55);
+  backdrop-filter: blur(10px);
+  transition: transform .28s ease, border-color .28s ease, box-shadow .28s ease;
 }
-.c-link:hover { border-color: var(--terra); background: rgba(242,234,217,.06); }
+.c-link:hover { transform: translateY(-4px); border-color: var(--terra); box-shadow: 0 10px 36px rgba(200,85,61,.16); }
 
 /* ─── MOBILE MENU ─── */
 .mobile-overlay {
@@ -596,7 +600,7 @@ nav, main, footer, .mobile-overlay { position: relative; z-index: 2; }
 
   <div class="sec-lbl mb-5 reveal"><span class="dot"></span>02 · מומחיות</div>
   <h2 class="f-serif text-3xl md:text-5xl font-bold mb-10 reveal" style="line-height:.95;letter-spacing:-.02em">
-    שלושה תחומים,<br><span class="grad">סיפור אחד</span>.
+    שלושה תחומים<br><span class="grad">סיפור אחד</span>
   </h2>
 
   <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
@@ -647,7 +651,7 @@ nav, main, footer, .mobile-overlay { position: relative; z-index: 2; }
 
   <div class="sec-lbl mb-5 reveal"><span class="dot"></span>03 · ניסיון</div>
   <h2 class="f-serif text-3xl md:text-5xl font-bold mb-10 reveal" style="line-height:.95;letter-spacing:-.02em">
-    עשור של<br><span class="grad">יישום בשטח</span>.
+    עשור של<br><span class="grad">יישום בשטח</span>
   </h2>
 
   <div class="reveal">
@@ -725,7 +729,7 @@ nav, main, footer, .mobile-overlay { position: relative; z-index: 2; }
 
   <div class="sec-lbl mb-5 reveal"><span class="dot"></span>04 · השכלה וקורסים</div>
   <h2 class="f-serif text-3xl md:text-4xl font-bold mb-10 reveal" style="line-height:.95;letter-spacing:-.02em">
-    בסיס אקדמי<br><span class="grad">ולמידה מתמשכת</span>.
+    בסיס אקדמי<br><span class="grad">ולמידה מתמדת</span>
   </h2>
 
   <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
@@ -849,7 +853,7 @@ nav, main, footer, .mobile-overlay { position: relative; z-index: 2; }
 <div class="max-w-5xl mx-auto">
   <div class="sec-lbl mb-5 reveal"><span class="dot"></span>07 · סרטון</div>
   <h2 class="f-serif text-3xl md:text-4xl font-bold mb-10 reveal" style="line-height:.95;letter-spacing:-.02em">
-    בינה מלאכותית —<br><span class="grad">מסביר בעצמי</span>.
+    אווטר שיצרתי<br><span class="grad">מסביר מה זה בינה מלאכותית</span>
   </h2>
   <div class="flex justify-center reveal">
     <div class="video-shell" style="width:min(320px,84vw)">
@@ -876,7 +880,7 @@ nav, main, footer, .mobile-overlay { position: relative; z-index: 2; }
 <div class="max-w-5xl mx-auto">
   <div class="sec-lbl mb-5 reveal"><span class="dot"></span>07 · תעודות</div>
   <h2 class="f-serif text-3xl md:text-4xl font-bold mb-10 reveal" style="line-height:.95;letter-spacing:-.02em">
-    הכישורים<br><span class="grad">מאומתים</span>.
+    תעודות<br><span class="grad">מקצועיות</span>
   </h2>
   <div class="grid grid-cols-2 md:grid-cols-4 gap-4 reveal">
     <div class="cert-card" onclick="openLb('/Certificate/הצטיינות 8200.png')">
@@ -918,9 +922,9 @@ nav, main, footer, .mobile-overlay { position: relative; z-index: 2; }
     <div class="sec-lbl mb-5 reveal" style="color:rgba(242,234,217,.55)">
       <span class="dot gold"></span>08 · קשר
     </div>
-    <h2 class="f-serif text-4xl md:text-6xl font-bold leading-[.95] max-w-2xl reveal" style="letter-spacing:-.025em">
-      בואו נעשה<br>
-      <span class="grad">משהו טוב</span> ביחד.
+    <h2 class="f-serif text-2xl md:text-4xl font-bold leading-[1.1] max-w-2xl reveal" style="letter-spacing:-.025em">
+      מאמין שהאדם חשוב מהקורות חיים שלו<br>
+      <span class="grad">בוא נוכיח את זה בשיחה</span>
     </h2>
     <div class="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-2xl reveal">
       <a href="mailto:goldmanarie@gmail.com" class="c-link">
@@ -929,7 +933,7 @@ nav, main, footer, .mobile-overlay { position: relative; z-index: 2; }
       </a>
       <a href="tel:+972545320855" class="c-link">
         <div class="text-ochre text-xl">📞</div>
-        <div class="f-serif font-bold text-lg mt-1.5 f-mono" dir="ltr">054-5320855</div>
+        <div class="f-serif font-bold text-lg mt-1.5 f-mono" dir="rtl">054-5320855</div>
       </a>
       <a href="https://www.linkedin.com/in/arie-goldman-12a737204" target="_blank" rel="noopener" class="c-link">
         <div class="text-ochre text-xl">💼</div>
@@ -983,10 +987,10 @@ nav, main, footer, .mobile-overlay { position: relative; z-index: 2; }
 <!-- ══════ FOOTER ══════ -->
 <footer style="background:#F2EAD9;color:rgba(28,36,24,.45);border-top:1px solid rgba(74,107,92,.15);padding:24px 20px">
   <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-    <span class="f-mono text-xs">© 2026 אריה גולדמן · goldmanarie.com</span>
+    <span class="f-mono text-xs">© 2026 אריה גולדמן · www.goldmanarie.com</span>
     <div class="flex items-center gap-2 f-mono text-xs" style="color:rgba(28,36,24,.3)">
-      <span class="dot gold" style="width:5px;height:5px;animation:none;box-shadow:none;background:#D4A24C;opacity:.7"></span>
-      SYS://ARIE.OS · v2026.05
+      <span style="width:5px;height:5px;border-radius:50%;background:#D4A24C;opacity:.7;display:inline-block"></span>
+      v2026.06
     </div>
   </div>
 </footer>
