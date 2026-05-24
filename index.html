@@ -89,7 +89,13 @@ nav, main, footer, .mobile-overlay { position: relative; z-index: 2; }
   animation: pulse-ring 2.2s ease-out infinite;
   flex-shrink: 0;
 }
-.dot.gold { background: var(--ochre); box-shadow: 0 0 0 0 rgba(212,162,76,.4); animation-name: pulse-gold; }
+.dot.gold  { background: var(--ochre); box-shadow: 0 0 0 0 rgba(212,162,76,.4); animation-name: pulse-gold; }
+.dot.green { background: #22c55e;     box-shadow: 0 0 0 0 rgba(34,197,94,.4);  animation-name: pulse-green; }
+@keyframes pulse-green {
+  0%   { box-shadow: 0 0 0 0 rgba(34,197,94,.5); }
+  70%  { box-shadow: 0 0 0 8px rgba(34,197,94,0); }
+  100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); }
+}
 @keyframes pulse-ring {
   0%   { box-shadow: 0 0 0 0 rgba(200,85,61,.5); }
   70%  { box-shadow: 0 0 0 8px rgba(200,85,61,0); }
@@ -126,39 +132,96 @@ nav, main, footer, .mobile-overlay { position: relative; z-index: 2; }
 }
 .coords span::before { content: '◆ '; }
 
-/* ─── PORTRAIT ORBIT ─── */
-.portrait-host {
+/* ─── PORTRAIT RECTANGLE ─── */
+.portrait-wrap {
   position: relative;
-  width: min(300px, 85vw);
-  height: min(300px, 85vw);
-  margin: 0 auto;
+  width: min(300px, 88vw);
 }
-.portrait-halo {
-  position: absolute; inset: -18%; border-radius: 50%;
-  background: radial-gradient(circle, rgba(212,162,76,.48) 0%, rgba(200,85,61,.18) 38%, transparent 65%);
-  z-index: 0; animation: halo 4s ease-in-out infinite;
+.portrait-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3/4;
+  overflow: hidden;
+  border: 1.5px solid rgba(74,107,92,.22);
+  box-shadow: 7px 7px 0 var(--cream-d), 8px 8px 0 rgba(74,107,92,.18);
 }
-@keyframes halo {
-  0%, 100% { opacity: .85; transform: scale(1); }
-  50%       { opacity: 1;   transform: scale(1.07); }
+.portrait-frame::before {
+  content: '';
+  position: absolute; top: -1px; inset-inline-end: -1px;
+  width: 32px; height: 32px;
+  border-top: 3px solid var(--terra);
+  border-inline-end: 3px solid var(--terra);
+  z-index: 3;
 }
-.portrait-ring {
-  position: absolute; inset: 14%;
-  border-radius: 50%; overflow: hidden;
-  border: 5px solid var(--cream-d);
-  box-shadow: 0 10px 48px rgba(200,85,61,.38), inset 0 0 0 1px rgba(212,162,76,.35);
-  z-index: 1;
+.portrait-frame::after {
+  content: '';
+  position: absolute; bottom: -1px; inset-inline-start: -1px;
+  width: 32px; height: 32px;
+  border-bottom: 3px solid var(--olive);
+  border-inline-start: 3px solid var(--olive);
+  z-index: 3;
 }
-.portrait-ring img { width: 100%; height: 100%; object-fit: cover; filter: sepia(.1) saturate(.92) brightness(1.02); display: block; }
-
-/* Single rotating orbit SVG */
-.orbit-svg {
-  position: absolute; inset: 0;
+.portrait-frame img {
   width: 100%; height: 100%;
-  z-index: 3; overflow: visible;
-  animation: spin-cw 22s linear infinite;
+  object-fit: cover; object-position: center top;
+  display: block;
+  filter: sepia(.08) saturate(.95) brightness(1.03);
 }
-@keyframes spin-cw { to { transform: rotate(360deg); } }
+.portrait-accent-bar {
+  position: absolute;
+  top: 16px; inset-inline-start: -11px;
+  width: 3px; height: 58%;
+  background: linear-gradient(to bottom, var(--terra), var(--ochre));
+}
+.portrait-badge {
+  position: absolute; bottom: 0; inset-inline-start: 0; inset-inline-end: 0;
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 14px;
+  background: rgba(28,36,24,.84);
+  backdrop-filter: blur(10px);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px; color: var(--cream);
+  letter-spacing: .06em; z-index: 2;
+}
+.portrait-meta {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 9px 2px 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px; color: var(--olive);
+  letter-spacing: .08em;
+}
+.portrait-float {
+  position: absolute;
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 7px 13px;
+  background: var(--ink);
+  border: 1px solid rgba(212,162,76,.4);
+  border-radius: 999px;
+  font-family: 'Assistant', sans-serif;
+  font-size: 12px; font-weight: 600;
+  color: var(--cream);
+  white-space: nowrap;
+  box-shadow: 0 4px 18px rgba(28,36,24,.35);
+  z-index: 10;
+}
+.portrait-float-top {
+  top: 10%;
+  inset-inline-end: -22px;
+  animation: float-top 3.2s ease-in-out infinite;
+}
+.portrait-float-bottom {
+  bottom: 22%;
+  inset-inline-start: -22px;
+  animation: float-bottom 3.8s ease-in-out infinite;
+}
+@keyframes float-top {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-8px); }
+}
+@keyframes float-bottom {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(8px); }
+}
 
 /* ─── BUTTONS ─── */
 .btn-p {
@@ -396,49 +459,37 @@ nav, main, footer, .mobile-overlay { position: relative; z-index: 2; }
 
     <!-- Portrait: first on mobile, second on desktop -->
     <div class="md:col-span-5 md:order-2 order-1 a3 flex justify-center" style="padding-block:12px">
-      <div class="portrait-host">
-        <div class="portrait-halo"></div>
-        <div class="portrait-ring">
+      <div class="portrait-wrap" style="margin-inline:28px">
+        <div class="portrait-frame">
           <img src="/profile3.png" alt="אריה גולדמן — תמונת פרופיל">
+          <div class="portrait-accent-bar"></div>
+          <div class="portrait-badge">
+            <span class="dot green"></span>זמין מידית
+          </div>
         </div>
-        <!-- Single orbit ring: 3 rotating Hebrew phrases via SVG textPath -->
-        <svg class="orbit-svg" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <defs>
-            <!-- Full circle path: center (150,150), radius 133 -->
-            <path id="orb" d="M150,17 A133,133,0,1,1,149.99,17"/>
-          </defs>
-          <text
-            font-size="12"
-            fill="#C8553D"
-            font-family="'Assistant', sans-serif"
-            font-weight="700"
-            letter-spacing="1.4">
-            <textPath href="#orb">◆  תעודת הצטיינות 8200           ◆  מבחר כלי AI           ◆  זמינות מידית           </textPath>
-          </text>
-        </svg>
+        <div class="portrait-float portrait-float-top">יחידת 8200 🏅</div>
+        <div class="portrait-float portrait-float-bottom">AI &amp; ERP Expert 🚂</div>
+        <div class="portrait-meta">
+          <span>// ARIE.GOLDMAN</span>
+          <span dir="ltr">JLM · IL ◆</span>
+        </div>
       </div>
     </div>
 
     <!-- Headline: second on mobile, first on desktop -->
     <div class="md:col-span-7 md:order-1 order-2">
 
-      <h1 class="f-serif a2 leading-[.9] font-bold tracking-tight"
-          style="font-size:clamp(46px,8.5vw,90px);letter-spacing:-.025em">
-        מומחה<br>
-        <span class="grad font-black">ERP</span><br>
-        ושילוב<br>
-        <span class="text-olive italic" style="font-weight:400">AI</span> בארגון.
+      <h1 class="f-serif a2 leading-[1.0] font-bold tracking-tight"
+          style="font-size:clamp(38px,7vw,80px);letter-spacing:-.025em">
+        מומחה מערכות <span class="grad font-black">ERP</span><br>
+        ושימוש בכלי <span class="text-olive italic" style="font-weight:400">AI</span> מגוונים.
       </h1>
 
       <p class="f-serif a3 italic text-olive mt-5 leading-snug"
          style="font-size:clamp(17px,2.3vw,24px)">
-        עשור של ניסיון, שש מערכות ממשלתיות,<br class="hidden md:block">
-        ושלושה פרויקטי AI שמשנים תהליכים.
+        עשור של ניסיון בשטח, בהקמת \ ההטמעת \ ויישום מערכות ממשלתיות ופרטיות,<br class="hidden md:block">
+        עם יכולת לשלב טכנולוגיות AI בתהליכים קיימים.
       </p>
-
-      <div class="a4 mt-6">
-        <span class="pill"><span class="dot"></span>זמין לפרויקטים</span>
-      </div>
 
       <div class="a5 mt-6 flex flex-col sm:flex-row gap-3">
         <a href="#projects" class="btn-p min-h-[50px]">פרויקטים נבחרים ←</a>
@@ -694,50 +745,13 @@ nav, main, footer, .mobile-overlay { position: relative; z-index: 2; }
 
 
 <!-- ══════════════════════════════════
-     CERTIFICATES
-══════════════════════════════════ -->
-<section id="certificates" class="py-16 md:py-24 px-5 md:px-8 border-t border-olive/12">
-<div class="max-w-5xl mx-auto">
-  <div class="sec-lbl mb-5 reveal"><span class="dot"></span>05 · תעודות</div>
-  <h2 class="f-serif text-3xl md:text-4xl font-bold mb-10 reveal" style="line-height:.95;letter-spacing:-.02em">
-    הכישורים<br><span class="grad">מאומתים</span>.
-  </h2>
-  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 reveal">
-    <div class="cert-card" onclick="openLb('/Certificate/הצטיינות 8200.png')">
-      <img src="/Certificate/הצטיינות 8200.png" alt="תעודת הצטיינות 8200" loading="lazy">
-      <div class="cert-lbl">הצטיינות 8200</div>
-    </div>
-    <div class="cert-card" onclick="openLb('/Certificate/מהנדס תעשיה וניהול.png')">
-      <img src="/Certificate/מהנדס תעשיה וניהול.png" alt="B.Sc הנדסת תעשיה וניהול" loading="lazy">
-      <div class="cert-lbl">B.Sc הנדסה</div>
-    </div>
-    <div class="cert-card" onclick="openLb('/Certificate/מיישם SAP.png')">
-      <img src="/Certificate/מיישם SAP.png" alt="מיישם SAP" loading="lazy">
-      <div class="cert-lbl">מיישם SAP</div>
-    </div>
-    <div class="cert-card" onclick="openLb('/Certificate/קורס מפתחי AI.png')">
-      <img src="/Certificate/קורס מפתחי AI.png" alt="קורס מפתחי AI" loading="lazy">
-      <div class="cert-lbl">מפתחי AI</div>
-    </div>
-  </div>
-</div>
-</section>
-
-<!-- Lightbox -->
-<div id="lb" role="dialog" aria-modal="true" aria-label="תצוגת תעודה">
-  <button id="lb-x" onclick="closeLb()" aria-label="סגור">✕</button>
-  <img id="lb-img" src="" alt="תעודה מוגדלת">
-</div>
-
-
-<!-- ══════════════════════════════════
      PROJECTS
 ══════════════════════════════════ -->
 <section id="projects" class="py-16 md:py-24 px-5 md:px-8 border-t border-olive/12" style="background:rgba(237,227,206,.28)">
 <div class="max-w-5xl mx-auto">
   <div class="sec-lbl mb-5 reveal"><span class="dot"></span>06 · פרויקטים</div>
   <h2 class="f-serif text-3xl md:text-5xl font-bold mb-10 reveal" style="line-height:.95;letter-spacing:-.02em">
-    AI בעברית,<br><span class="grad">שמשנה תהליכים</span>.
+    דוגמאות לפרויקטי<br><span class="grad">AI שיצרתי</span>
   </h2>
   <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
 
@@ -807,6 +821,43 @@ nav, main, footer, .mobile-overlay { position: relative; z-index: 2; }
   </div>
 </div>
 </section>
+
+
+<!-- ══════════════════════════════════
+     CERTIFICATES
+══════════════════════════════════ -->
+<section id="certificates" class="py-16 md:py-24 px-5 md:px-8 border-t border-olive/12">
+<div class="max-w-5xl mx-auto">
+  <div class="sec-lbl mb-5 reveal"><span class="dot"></span>07 · תעודות</div>
+  <h2 class="f-serif text-3xl md:text-4xl font-bold mb-10 reveal" style="line-height:.95;letter-spacing:-.02em">
+    הכישורים<br><span class="grad">מאומתים</span>.
+  </h2>
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 reveal">
+    <div class="cert-card" onclick="openLb('/Certificate/הצטיינות 8200.png')">
+      <img src="/Certificate/הצטיינות 8200.png" alt="תעודת הצטיינות 8200" loading="lazy">
+      <div class="cert-lbl">הצטיינות 8200</div>
+    </div>
+    <div class="cert-card" onclick="openLb('/Certificate/מהנדס תעשיה וניהול.png')">
+      <img src="/Certificate/מהנדס תעשיה וניהול.png" alt="B.Sc הנדסת תעשיה וניהול" loading="lazy">
+      <div class="cert-lbl">B.Sc הנדסה</div>
+    </div>
+    <div class="cert-card" onclick="openLb('/Certificate/מיישם SAP.png')">
+      <img src="/Certificate/מיישם SAP.png" alt="מיישם SAP" loading="lazy">
+      <div class="cert-lbl">מיישם SAP</div>
+    </div>
+    <div class="cert-card" onclick="openLb('/Certificate/קורס מפתחי AI.png')">
+      <img src="/Certificate/קורס מפתחי AI.png" alt="קורס מפתחי AI" loading="lazy">
+      <div class="cert-lbl">מפתחי AI</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- Lightbox -->
+<div id="lb" role="dialog" aria-modal="true" aria-label="תצוגת תעודה">
+  <button id="lb-x" onclick="closeLb()" aria-label="סגור">✕</button>
+  <img id="lb-img" src="" alt="תעודה מוגדלת">
+</div>
 
 
 <!-- ══════════════════════════════════
