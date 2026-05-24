@@ -1,1226 +1,899 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>אריה גולדמן | מהנדס מערכות ERP & AI</title>
-    <style>
-        :root {
-            --primary: #00d4ff;
-            --secondary: #7c3aed;
-            --accent: #06ffa5;
-            --dark: #080810;
-            --dark-2: #0f0f1a;
-            --dark-3: #1a1a2e;
-            --card-bg: rgba(255,255,255,0.04);
-            --card-border: rgba(255,255,255,0.08);
-            --text: #e2e8f0;
-            --text-muted: #94a3b8;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        html { scroll-behavior: smooth; }
-
-        body {
-            font-family: 'Segoe UI', 'Arial', sans-serif;
-            background: var(--dark);
-            color: var(--text);
-            direction: rtl;
-            overflow-x: hidden;
-        }
-
-        /* Animated background */
-        body::before {
-            content: '';
-            position: fixed;
-            inset: 0;
-            background:
-                radial-gradient(ellipse at 15% 20%, rgba(124,58,237,0.18) 0%, transparent 55%),
-                radial-gradient(ellipse at 85% 75%, rgba(0,212,255,0.12) 0%, transparent 55%),
-                radial-gradient(ellipse at 50% 50%, rgba(6,255,165,0.04) 0%, transparent 70%);
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        /* ─── NAV ─── */
-        nav {
-            position: fixed;
-            top: 0; width: 100%;
-            background: rgba(8,8,16,0.85);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border-bottom: 1px solid rgba(0,212,255,0.15);
-            z-index: 1000;
-            padding: 1rem 8%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .nav-logo {
-            font-size: 1.15rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #fff 30%, var(--primary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: 0.5px;
-        }
-
-        .nav-links { display: flex; gap: 0.25rem; }
-
-        .nav-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            padding: 0.4rem 0.85rem;
-            border-radius: 8px;
-            font-size: 0.88rem;
-            transition: all 0.25s;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary);
-            background: rgba(0,212,255,0.08);
-        }
-
-        /* ─── HERO ─── */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding: 7rem 8% 5rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero-content {
-            display: grid;
-            grid-template-columns: 1.1fr 0.9fr;
-            gap: 5rem;
-            align-items: center;
-            width: 100%;
-        }
-
-        .hero-eyebrow {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.4rem 1rem;
-            background: rgba(0,212,255,0.08);
-            border: 1px solid rgba(0,212,255,0.25);
-            border-radius: 20px;
-            font-size: 0.82rem;
-            color: var(--primary);
-            margin-bottom: 1.25rem;
-            letter-spacing: 0.3px;
-        }
-
-        .hero-text h1 {
-            font-size: 3.8rem;
-            font-weight: 900;
-            line-height: 1.05;
-            margin-bottom: 0.4rem;
-            background: linear-gradient(135deg, #ffffff 0%, #c7d8ff 60%, var(--primary) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero-subtitle {
-            font-size: 1.2rem;
-            color: #a78bfa;
-            font-weight: 500;
-            margin-bottom: 1.5rem;
-        }
-
-        .hero-text p.summary {
-            color: var(--text-muted);
-            line-height: 1.85;
-            font-size: 0.97rem;
-            margin-bottom: 2rem;
-            max-width: 520px;
-        }
-
-        .contact-chips {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.6rem;
-            margin-bottom: 2.25rem;
-        }
-
-        .chip {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.45rem;
-            padding: 0.45rem 1rem;
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 50px;
-            font-size: 0.82rem;
-            color: var(--text-muted);
-            text-decoration: none;
-            transition: all 0.25s;
-        }
-
-        .chip:hover {
-            border-color: rgba(0,212,255,0.4);
-            color: var(--primary);
-            transform: translateY(-2px);
-            background: rgba(0,212,255,0.06);
-        }
-
-        .hero-cta {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .btn-primary {
-            padding: 0.8rem 2rem;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border: none;
-            border-radius: 10px;
-            color: white;
-            font-size: 0.95rem;
-            cursor: pointer;
-            text-decoration: none;
-            font-weight: 700;
-            transition: all 0.3s;
-            box-shadow: 0 4px 20px rgba(0,212,255,0.2);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(0,212,255,0.35);
-        }
-
-        .btn-secondary {
-            padding: 0.8rem 2rem;
-            background: transparent;
-            border: 1px solid rgba(0,212,255,0.4);
-            border-radius: 10px;
-            color: var(--primary);
-            font-size: 0.95rem;
-            cursor: pointer;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-
-        .btn-secondary:hover {
-            background: rgba(0,212,255,0.08);
-            transform: translateY(-3px);
-            border-color: var(--primary);
-        }
-
-        /* ─── PROFILE IMAGE ─── */
-        .hero-image {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .profile-wrapper {
-            position: relative;
-            width: 360px;
-            height: 360px;
-        }
-
-        .profile-ring-outer {
-            position: absolute;
-            inset: -16px;
-            border-radius: 50%;
-            background: conic-gradient(
-                var(--primary) 0deg,
-                var(--secondary) 120deg,
-                var(--accent) 240deg,
-                var(--primary) 360deg
-            );
-            animation: spin 7s linear infinite;
-        }
-
-        .profile-ring-outer::after {
-            content: '';
-            position: absolute;
-            inset: 5px;
-            background: var(--dark);
-            border-radius: 50%;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        .profile-img {
-            position: absolute;
-            inset: 0;
-            border-radius: 50%;
-            overflow: hidden;
-            z-index: 1;
-            background: linear-gradient(135deg, #1a0533, #001a2e, #003040);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .profile-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: top center;
-        }
-
-        .profile-fallback {
-            font-size: 5rem;
-            display: none;
-        }
-
-        .floating-badge {
-            position: absolute;
-            background: rgba(8,8,16,0.92);
-            border-radius: 12px;
-            padding: 0.55rem 1rem;
-            font-size: 0.78rem;
-            white-space: nowrap;
-            z-index: 2;
-            backdrop-filter: blur(12px);
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-            font-weight: 600;
-        }
-
-        .badge-tl {
-            top: 0;
-            right: -40px;
-            border: 1px solid rgba(6,255,165,0.4);
-            color: var(--accent);
-            animation: floatBadge 3.5s ease-in-out infinite;
-        }
-
-        .badge-bl {
-            bottom: 20px;
-            left: -55px;
-            border: 1px solid rgba(124,58,237,0.5);
-            color: #c4b5fd;
-            animation: floatBadge 3.5s ease-in-out infinite 1.75s;
-        }
-
-        @keyframes floatBadge {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-9px); }
-        }
-
-        /* ─── SECTIONS ─── */
-        section {
-            padding: 5.5rem 8%;
-            position: relative;
-            z-index: 1;
-        }
-
-        .section-header { margin-bottom: 3rem; }
-
-        .section-tag {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            padding: 0.3rem 0.85rem;
-            background: rgba(124,58,237,0.12);
-            border: 1px solid rgba(124,58,237,0.3);
-            border-radius: 20px;
-            font-size: 0.78rem;
-            color: #a78bfa;
-            margin-bottom: 0.75rem;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-        }
-
-        .section-title {
-            font-size: 2.1rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #fff, var(--primary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 0.5rem;
-        }
-
-        .section-desc {
-            color: var(--text-muted);
-            font-size: 0.92rem;
-        }
-
-        .section-divider {
-            width: 55px;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            border-radius: 2px;
-            margin-top: 1rem;
-        }
-
-        /* ─── SKILLS ─── */
-        #skills { background: linear-gradient(180deg, transparent, rgba(124,58,237,0.04)); }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
-            gap: 1.25rem;
-        }
-
-        .skill-card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 16px;
-            padding: 1.5rem;
-            text-align: center;
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-            cursor: default;
-        }
-
-        .skill-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            transform: scaleX(0);
-            transform-origin: right;
-            transition: transform 0.35s;
-        }
-
-        .skill-card:hover::before { transform: scaleX(1); transform-origin: left; }
-        .skill-card:hover { transform: translateY(-6px); border-color: rgba(0,212,255,0.25); }
-
-        .skill-icon { font-size: 2.2rem; margin-bottom: 0.6rem; }
-        .skill-name { font-weight: 700; font-size: 0.95rem; margin-bottom: 0.3rem; }
-        .skill-level { font-size: 0.78rem; color: var(--primary); margin-bottom: 0.7rem; }
-
-        .skill-bar {
-            height: 4px;
-            background: rgba(255,255,255,0.08);
-            border-radius: 2px;
-            overflow: hidden;
-        }
-
-        .skill-bar-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            border-radius: 2px;
-            width: 0;
-            transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        /* ─── TIMELINE ─── */
-        .timeline {
-            position: relative;
-            padding-right: 2.5rem;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            right: 7px;
-            top: 6px;
-            bottom: 6px;
-            width: 2px;
-            background: linear-gradient(180deg,
-                var(--primary) 0%,
-                var(--secondary) 50%,
-                rgba(124,58,237,0.2) 100%);
-            border-radius: 2px;
-        }
-
-        .timeline-item {
-            position: relative;
-            margin-bottom: 2.5rem;
-        }
-
-        .timeline-dot {
-            position: absolute;
-            right: -2rem;
-            top: 8px;
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            background: var(--dark);
-            border: 2.5px solid var(--primary);
-            z-index: 1;
-            transition: all 0.3s;
-        }
-
-        .timeline-dot::after {
-            content: '';
-            position: absolute;
-            inset: 3px;
-            border-radius: 50%;
-            background: var(--primary);
-            transition: all 0.3s;
-        }
-
-        .timeline-item:hover .timeline-dot {
-            box-shadow: 0 0 0 6px rgba(0,212,255,0.15);
-        }
-
-        .timeline-card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 16px;
-            padding: 1.5rem 2rem;
-            transition: all 0.3s;
-        }
-
-        .timeline-card:hover {
-            border-color: rgba(0,212,255,0.25);
-            transform: translateX(-4px);
-            background: rgba(0,212,255,0.03);
-        }
-
-        .timeline-date {
-            font-size: 0.8rem;
-            color: var(--primary);
-            font-weight: 700;
-            letter-spacing: 0.5px;
-            margin-bottom: 0.4rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .timeline-date::before {
-            content: '';
-            width: 20px;
-            height: 1px;
-            background: var(--primary);
-            flex-shrink: 0;
-        }
-
-        .timeline-title {
-            font-size: 1.05rem;
-            font-weight: 700;
-            margin-bottom: 0.2rem;
-        }
-
-        .timeline-company {
-            color: #a78bfa;
-            font-size: 0.87rem;
-            font-weight: 500;
-            margin-bottom: 1rem;
-        }
-
-        .timeline-bullets { list-style: none; }
-
-        .timeline-bullets li {
-            position: relative;
-            padding-right: 1.4rem;
-            color: var(--text-muted);
-            font-size: 0.88rem;
-            line-height: 1.65;
-            margin-bottom: 0.4rem;
-        }
-
-        .timeline-bullets li::before {
-            content: '▸';
-            position: absolute;
-            right: 0;
-            color: var(--primary);
-            font-size: 0.7rem;
-            top: 0.3rem;
-        }
-
-        /* ─── EDUCATION ─── */
-        .edu-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1.25rem;
-            margin-bottom: 3rem;
-        }
-
-        .edu-card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 16px;
-            padding: 1.75rem;
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .edu-card::after {
-            content: '';
-            position: absolute;
-            bottom: 0; left: 0; right: 0;
-            height: 2.5px;
-            background: linear-gradient(90deg, var(--secondary), var(--accent));
-        }
-
-        .edu-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(124,58,237,0.35);
-        }
-
-        .edu-year {
-            font-size: 0.78rem;
-            color: var(--accent);
-            font-weight: 700;
-            letter-spacing: 0.5px;
-            margin-bottom: 0.6rem;
-        }
-
-        .edu-degree {
-            font-size: 0.95rem;
-            font-weight: 700;
-            color: #c4b5fd;
-            margin-bottom: 0.3rem;
-        }
-
-        .edu-school {
-            font-size: 0.88rem;
-            color: var(--text-muted);
-            margin-bottom: 0.3rem;
-        }
-
-        .edu-field { font-size: 0.83rem; color: var(--text); }
-
-        /* ─── COURSES ─── */
-        .courses-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 1rem;
-        }
-
-        .course-card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 12px;
-            padding: 1.1rem 1.4rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            transition: all 0.25s;
-        }
-
-        .course-card:hover {
-            border-color: rgba(0,212,255,0.25);
-            transform: translateY(-3px);
-            background: rgba(0,212,255,0.03);
-        }
-
-        .course-year-badge {
-            min-width: 46px;
-            padding: 0.35rem 0.5rem;
-            background: rgba(0,212,255,0.1);
-            border: 1px solid rgba(0,212,255,0.2);
-            border-radius: 8px;
-            font-size: 0.78rem;
-            font-weight: 700;
-            color: var(--primary);
-            text-align: center;
-        }
-
-        .course-name { font-size: 0.88rem; font-weight: 600; }
-        .course-org { font-size: 0.78rem; color: var(--text-muted); margin-top: 0.15rem; }
-
-        /* ─── PROJECTS ─── */
-        #projects {
-            background: linear-gradient(180deg, transparent, rgba(0,212,255,0.03), transparent);
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .project-card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 18px;
-            padding: 1.75rem;
-            transition: all 0.35s;
-            position: relative;
-            overflow: hidden;
-            text-decoration: none;
-            color: inherit;
-            display: block;
-        }
-
-        .project-card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(0,212,255,0.04), rgba(124,58,237,0.04));
-            opacity: 0;
-            transition: opacity 0.35s;
-        }
-
-        .project-card:hover::before { opacity: 1; }
-
-        .project-card:hover {
-            transform: translateY(-10px);
-            border-color: rgba(0,212,255,0.35);
-            box-shadow: 0 24px 60px rgba(0,212,255,0.1);
-        }
-
-        .project-card-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 1rem;
-        }
-
-        .project-status {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.35rem;
-            padding: 0.3rem 0.7rem;
-            border-radius: 20px;
-            font-size: 0.72rem;
-            font-weight: 700;
-            letter-spacing: 0.3px;
-        }
-
-        .status-live {
-            background: rgba(6,255,165,0.1);
-            border: 1px solid rgba(6,255,165,0.3);
-            color: var(--accent);
-        }
-
-        .status-live::before {
-            content: '';
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: var(--accent);
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.5; transform: scale(1.3); }
-        }
-
-        .status-soon {
-            background: rgba(251,191,36,0.1);
-            border: 1px solid rgba(251,191,36,0.3);
-            color: #fbbf24;
-        }
-
-        .project-arrow {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            transition: all 0.3s;
-        }
-
-        .project-card:hover .project-arrow {
-            color: var(--primary);
-            transform: translate(-4px, -4px);
-        }
-
-        .project-icon {
-            font-size: 2rem;
-            margin-bottom: 0.75rem;
-        }
-
-        .project-title {
-            font-size: 1.05rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .project-desc {
-            color: var(--text-muted);
-            font-size: 0.87rem;
-            line-height: 1.65;
-            margin-bottom: 1.25rem;
-        }
-
-        .project-tech {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.45rem;
-        }
-
-        .tech-tag {
-            padding: 0.22rem 0.6rem;
-            background: rgba(124,58,237,0.12);
-            border: 1px solid rgba(124,58,237,0.25);
-            border-radius: 6px;
-            font-size: 0.72rem;
-            color: #c4b5fd;
-            font-weight: 500;
-        }
-
-        /* ─── FOOTER ─── */
-        footer {
-            padding: 3rem 8%;
-            border-top: 1px solid rgba(255,255,255,0.06);
-            text-align: center;
-            z-index: 1;
-            position: relative;
-        }
-
-        .footer-name {
-            font-size: 1.5rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #fff, var(--primary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 0.5rem;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin: 1rem 0;
-        }
-
-        .footer-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.85rem;
-            transition: color 0.2s;
-        }
-
-        .footer-links a:hover { color: var(--primary); }
-
-        .footer-copy {
-            color: rgba(148,163,184,0.5);
-            font-size: 0.78rem;
-            margin-top: 0.75rem;
-        }
-
-        /* ─── SCROLL ANIMATIONS ─── */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(28px);
-            transition: opacity 0.65s ease, transform 0.65s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* ─── RESPONSIVE ─── */
-        @media (max-width: 900px) {
-            .hero-content { grid-template-columns: 1fr; gap: 3rem; text-align: center; }
-            .hero-image { order: -1; }
-            .profile-wrapper { width: 260px; height: 260px; }
-            .hero-text h1 { font-size: 2.8rem; }
-            .contact-chips, .hero-cta { justify-content: center; }
-            .hero-text p.summary { max-width: 100%; }
-            .badge-tl { right: -20px; top: -15px; }
-            .badge-bl { left: -20px; }
-        }
-
-        @media (max-width: 600px) {
-            nav { padding: 1rem 4%; }
-            .nav-links { display: none; }
-            section { padding: 3.5rem 5%; }
-            .hero { padding: 6rem 5% 4rem; }
-            .hero-text h1 { font-size: 2.2rem; }
-            .section-title { font-size: 1.7rem; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>אריה גולדמן — מומחה ERP ושילוב AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=Assistant:wght@300;400;500;600;700;800&family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        cream: '#F2EAD9', 'cream-d': '#EDE3CE',
+        ink: '#1C2418', terra: '#C8553D',
+        olive: '#4A6B5C', ochre: '#D4A24C', mocha: '#7A6B5A'
+      },
+      fontFamily: {
+        serif: ['"Frank Ruhl Libre"', 'serif'],
+        sans: ['Assistant', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace']
+      }
+    }
+  }
+}
+</script>
+<style>
+/* ─── RESET & BASE ─── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: 'Assistant', sans-serif;
+  background: #F2EAD9;
+  color: #1C2418;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── CSS VARS ─── */
+:root {
+  --terra: #C8553D;
+  --olive: #4A6B5C;
+  --ochre: #D4A24C;
+  --cream: #F2EAD9;
+  --cream-d: #EDE3CE;
+  --ink: #1C2418;
+  --mocha: #7A6B5A;
+}
+
+/* ─── ENGINEERING GRID BACKGROUND ─── */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  pointer-events: none; z-index: 0;
+  background-image:
+    linear-gradient(rgba(200,85,61,.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(200,85,61,.045) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* ─── WARM AMBIENT GLOWS ─── */
+body::after {
+  content: '';
+  position: fixed; inset: 0;
+  pointer-events: none; z-index: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 90% 10%, rgba(212,162,76,.28), transparent),
+    radial-gradient(ellipse 50% 60% at 8% 85%, rgba(200,85,61,.16), transparent);
+}
+
+nav, main, footer, .mobile-overlay { position: relative; z-index: 2; }
+
+/* ─── TYPOGRAPHY HELPERS ─── */
+.f-serif  { font-family: 'Frank Ruhl Libre', serif; }
+.f-mono   { font-family: 'JetBrains Mono', monospace; }
+.grad     { background: linear-gradient(135deg, var(--terra) 0%, var(--ochre) 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+/* ─── BLINK CURSOR ─── */
+.blink::after { content: '_'; color: var(--terra); animation: blink .9s step-end infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+
+/* ─── PULSE DOT ─── */
+.dot {
+  display: inline-block; width: 7px; height: 7px;
+  border-radius: 50%; background: var(--terra);
+  box-shadow: 0 0 0 0 rgba(200,85,61,.4);
+  animation: pulse-ring 2.2s ease-out infinite;
+  flex-shrink: 0;
+}
+.dot.gold { background: var(--ochre); box-shadow: 0 0 0 0 rgba(212,162,76,.4); animation-name: pulse-gold; }
+@keyframes pulse-ring {
+  0%   { box-shadow: 0 0 0 0 rgba(200,85,61,.5); }
+  70%  { box-shadow: 0 0 0 8px rgba(200,85,61,0); }
+  100% { box-shadow: 0 0 0 0 rgba(200,85,61,0); }
+}
+@keyframes pulse-gold {
+  0%   { box-shadow: 0 0 0 0 rgba(212,162,76,.5); }
+  70%  { box-shadow: 0 0 0 8px rgba(212,162,76,0); }
+  100% { box-shadow: 0 0 0 0 rgba(212,162,76,0); }
+}
+
+/* ─── SECTION LABEL ─── */
+.sec-lbl {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px; letter-spacing: .16em;
+  color: var(--olive); text-transform: uppercase;
+}
+
+/* ─── STATUS PILL ─── */
+.pill {
+  display: inline-flex; align-items: center; gap: 9px;
+  border: 1px solid var(--olive); padding: 7px 16px;
+  font-family: 'JetBrains Mono', monospace; font-size: 10.5px;
+  color: var(--olive); background: rgba(242,234,217,.65);
+  backdrop-filter: blur(8px); letter-spacing: .07em;
+}
+
+/* ─── COORDS ─── */
+.coords {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px; color: var(--terra); letter-spacing: .1em;
+  display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+}
+.coords span::before { content: '◆ '; }
+
+/* ─── PORTRAIT ORBIT ─── */
+.portrait-host {
+  position: relative;
+  width: min(300px, 85vw);
+  height: min(300px, 85vw);
+  margin: 0 auto;
+}
+.portrait-halo {
+  position: absolute; inset: -18%; border-radius: 50%;
+  background: radial-gradient(circle, rgba(212,162,76,.48) 0%, rgba(200,85,61,.18) 38%, transparent 65%);
+  z-index: 0; animation: halo 4s ease-in-out infinite;
+}
+@keyframes halo {
+  0%, 100% { opacity: .85; transform: scale(1); }
+  50%       { opacity: 1;   transform: scale(1.07); }
+}
+.portrait-ring {
+  position: absolute; inset: 14%;
+  border-radius: 50%; overflow: hidden;
+  border: 5px solid var(--cream-d);
+  box-shadow: 0 10px 48px rgba(200,85,61,.38), inset 0 0 0 1px rgba(212,162,76,.35);
+  z-index: 1;
+}
+.portrait-ring img { width: 100%; height: 100%; object-fit: cover; filter: sepia(.1) saturate(.92) brightness(1.02); display: block; }
+
+/* Single rotating orbit SVG */
+.orbit-svg {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  z-index: 3; overflow: visible;
+  animation: spin-cw 22s linear infinite;
+}
+@keyframes spin-cw { to { transform: rotate(360deg); } }
+
+/* ─── BUTTONS ─── */
+.btn-p {
+  background: var(--ink); color: var(--cream);
+  padding: 13px 22px; font-weight: 700; font-size: 14px;
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  border: 1.5px solid var(--ink);
+  transition: background .22s, border-color .22s, transform .22s, box-shadow .22s;
+  box-shadow: 0 4px 18px rgba(28,36,24,.22);
+}
+.btn-p:hover { background: var(--terra); border-color: var(--terra); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(200,85,61,.35); }
+.btn-o {
+  background: transparent; color: var(--ink);
+  border: 1.5px solid var(--ink); padding: 13px 22px;
+  font-weight: 700; font-size: 14px;
+  display: inline-flex; align-items: center; justify-content: center;
+  transition: background .22s, color .22s;
+}
+.btn-o:hover { background: var(--ink); color: var(--cream); }
+
+/* ─── GLASS CARD ─── */
+.card {
+  background: rgba(242,234,217,.5);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(74,107,92,.22);
+  border-radius: 16px; padding: 24px;
+  position: relative;
+  transition: transform .3s ease, box-shadow .3s ease;
+  box-shadow: 0 2px 20px rgba(28,36,24,.04), inset 0 1px 0 rgba(255,255,255,.55);
+}
+/* Corner brackets */
+.card::before {
+  content: ''; position: absolute; top: 9px; right: 9px;
+  width: 15px; height: 15px;
+  border-top: 1.5px solid var(--terra); border-right: 1.5px solid var(--terra);
+}
+.card::after {
+  content: ''; position: absolute; bottom: 9px; left: 9px;
+  width: 15px; height: 15px;
+  border-bottom: 1.5px solid var(--olive); border-left: 1.5px solid var(--olive);
+}
+.card:hover { transform: translateY(-5px); box-shadow: 0 14px 44px rgba(200,85,61,.16); }
+.card .ico {
+  width: 50px; height: 50px; border-radius: 13px;
+  background: linear-gradient(135deg, var(--terra), var(--ochre));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; color: var(--cream);
+  box-shadow: 0 4px 14px rgba(200,85,61,.32);
+}
+
+/* ─── EXPERIENCE ENTRY ─── */
+.exp-row {
+  display: flex; align-items: flex-start;
+  justify-content: space-between; gap: 12px;
+  padding: 18px 0; border-bottom: 1px solid rgba(74,107,92,.11);
+  flex-wrap: wrap;
+}
+.exp-row:last-child { border-bottom: none; }
+
+/* ─── EDUCATION CARD ─── */
+.edu-block {
+  border-inline-start: 3px solid var(--terra);
+  padding-inline-start: 15px; padding-block: 4px;
+  margin-bottom: 18px;
+}
+.edu-block:last-child { margin-bottom: 0; }
+
+/* ─── COURSE ROW ─── */
+.course-row {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  gap: 10px; padding: 11px 0;
+  border-bottom: 1px solid rgba(74,107,92,.1);
+}
+.course-row:last-child { border-bottom: none; }
+
+/* ─── CERT CARD ─── */
+.cert-card {
+  border: 1px solid rgba(74,107,92,.18);
+  border-radius: 11px; overflow: hidden;
+  background: var(--cream-d);
+  cursor: pointer;
+  transition: transform .28s ease, box-shadow .28s ease;
+}
+.cert-card:hover { transform: translateY(-4px); box-shadow: 0 10px 34px rgba(200,85,61,.18); }
+.cert-card img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; }
+.cert-lbl {
+  padding: 8px 11px;
+  font-family: 'JetBrains Mono', monospace; font-size: 9.5px;
+  color: var(--olive); letter-spacing: .05em;
+  border-top: 1px solid rgba(74,107,92,.12);
+}
+
+/* ─── PROJECT CARD ─── */
+.proj-card {
+  display: block;
+  border: 1px solid rgba(74,107,92,.2);
+  border-radius: 16px; padding: 22px;
+  background: rgba(242,234,217,.55);
+  backdrop-filter: blur(10px);
+  transition: transform .28s ease, border-color .28s ease, box-shadow .28s ease;
+}
+.proj-card:hover { transform: translateY(-4px); border-color: var(--terra); box-shadow: 0 10px 36px rgba(200,85,61,.16); }
+.proj-num { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: rgba(200,85,61,.45); letter-spacing: .12em; margin-bottom: 10px; }
+.tag {
+  display: inline-block;
+  background: rgba(74,107,92,.1); color: var(--olive);
+  font-size: 10.5px; font-weight: 600;
+  padding: 3px 10px; border-radius: 999px;
+  margin: 3px 3px 3px 0;
+}
+
+/* ─── VIDEO ─── */
+.video-shell {
+  border-radius: 18px; overflow: hidden;
+  box-shadow: 0 14px 52px rgba(28,36,24,.2);
+  border: 2px solid rgba(212,162,76,.28);
+}
+
+/* ─── CONTACT DARK ─── */
+.c-link {
+  display: block; padding: 15px 18px;
+  border: 1px solid rgba(242,234,217,.12);
+  border-radius: 12px;
+  transition: border-color .22s ease, background .22s ease;
+}
+.c-link:hover { border-color: var(--terra); background: rgba(242,234,217,.06); }
+
+/* ─── MOBILE MENU ─── */
+.mobile-overlay {
+  transform: translateY(-100%);
+  transition: transform .42s cubic-bezier(.65, 0, .35, 1);
+}
+.mobile-overlay.open { transform: translateY(0); }
+
+/* ─── NAV LINK UNDERLINE ─── */
+.nav-link { position: relative; padding-bottom: 2px; font-weight: 600; font-size: 14px; }
+.nav-link::after {
+  content: ''; position: absolute; bottom: 0; inset-inline-start: 0;
+  width: 100%; height: 1px; background: var(--terra);
+  transform: scaleX(0); transform-origin: right;
+  transition: transform .28s ease;
+}
+.nav-link:hover::after { transform: scaleX(1); }
+
+/* ─── SCROLL REVEAL ─── */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity .85s ease, transform .85s ease; }
+.reveal.in { opacity: 1; transform: translateY(0); }
+.reveal-d1 { transition-delay: .08s; }
+.reveal-d2 { transition-delay: .18s; }
+.reveal-d3 { transition-delay: .28s; }
+
+/* ─── HERO ENTRY ANIMATIONS ─── */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
+.a1 { animation: fadeUp .85s ease .05s both; }
+.a2 { animation: fadeUp .85s ease .2s both; }
+.a3 { animation: fadeUp .85s ease .38s both; }
+.a4 { animation: fadeUp .85s ease .55s both; }
+.a5 { animation: fadeUp .85s ease .72s both; }
+
+/* ─── LIGHTBOX ─── */
+#lb {
+  display: none; position: fixed; inset: 0; z-index: 9999;
+  background: rgba(28,36,24,.92);
+  align-items: center; justify-content: center; padding: 20px;
+}
+#lb.open { display: flex; }
+#lb img { max-width: min(90vw, 600px); max-height: 88vh; border-radius: 8px; box-shadow: 0 24px 80px rgba(0,0,0,.6); }
+#lb-x {
+  position: absolute; top: 16px; inset-inline-start: 16px;
+  width: 44px; height: 44px;
+  background: var(--cream); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; cursor: pointer; border: none; color: var(--ink);
+  transition: background .2s;
+}
+#lb-x:hover { background: var(--terra); color: var(--cream); }
+
+/* ─── MISC ─── */
+::selection { background: var(--terra); color: var(--cream); }
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--cream-d); }
+::-webkit-scrollbar-thumb { background: var(--olive); border: 2px solid var(--cream-d); }
+::-webkit-scrollbar-thumb:hover { background: var(--terra); }
+</style>
 </head>
 <body>
 
-<!-- ─── NAV ─── -->
-<nav>
-    <div class="nav-logo">AG · אריה גולדמן</div>
-    <div class="nav-links">
-        <a href="#about">אודות</a>
-        <a href="#skills">כישורים</a>
-        <a href="#experience">ניסיון</a>
-        <a href="#education">השכלה</a>
-        <a href="#projects">פרויקטים</a>
+<!-- ══════ NAV ══════ -->
+<nav class="sticky top-0 z-50 border-b border-olive/20" style="background:rgba(242,234,217,.9);backdrop-filter:blur(14px)">
+  <div class="max-w-5xl mx-auto px-5 h-16 flex items-center justify-between">
+    <a href="#top" class="f-serif text-xl font-bold blink tracking-tight" style="letter-spacing:-.01em">אריה גולדמן</a>
+    <div class="hidden md:flex items-center gap-8">
+      <a href="#about"      class="nav-link">אודות</a>
+      <a href="#experience" class="nav-link">ניסיון</a>
+      <a href="#projects"   class="nav-link">פרויקטים</a>
+      <a href="#contact"    class="btn-p" style="padding:10px 18px;font-size:13px">בואו נדבר ←</a>
     </div>
+    <button id="nav-open" class="md:hidden w-10 h-10 flex items-center justify-center bg-ink text-cream rounded-md" aria-label="תפריט">
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+        <line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="15" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/>
+      </svg>
+    </button>
+  </div>
 </nav>
 
-<!-- ─── HERO ─── -->
-<section class="hero" id="about">
-    <div class="hero-content">
-        <div class="hero-text">
-            <div class="hero-eyebrow">⚡ מהנדס מערכות ERP &amp; מומחה AI — זמינות מיידית</div>
-            <h1>אריה גולדמן</h1>
-            <div class="hero-subtitle">10 שנות ניסיון · SAP · SQL · AI Tools</div>
-            <p class="summary">
-                מהנדס בעל 10 שנות ניסיון במערכות ERP, יישום והטמעה במודולים השונים.
-                ניסיון רב בעבודה עם SQL ואקסל ברמה גבוהה. בעל 2 תארים אקדמאים
-                בהנדסת תעשיה וניהול ומדעי המחשב. שירות צבאי ביחידת 8200 עם תעודת הצטיינות.
-                מחפש את האתגר הבא באזור ירושלים.
-            </p>
-            <div class="contact-chips">
-                <a href="mailto:goldmanarie@gmail.com" class="chip">📧 goldmanarie@gmail.com</a>
-                <a href="tel:0545320855" class="chip">📱 054-5320855</a>
-                <a href="https://www.linkedin.com/in/Arie" target="_blank" rel="noopener" class="chip">💼 LinkedIn</a>
-                <span class="chip">📍 ירושלים</span>
-            </div>
-            <div class="hero-cta">
-                <a href="#projects" class="btn-primary">🚀 הפרויקטים שלי</a>
-                <a href="mailto:goldmanarie@gmail.com" class="btn-secondary">✉️ צור קשר</a>
-            </div>
-        </div>
+<!-- ══════ MOBILE MENU ══════ -->
+<div id="m-menu" class="mobile-overlay fixed inset-0 z-40 bg-cream flex flex-col">
+  <div class="h-16 px-5 flex items-center justify-between border-b border-olive/20">
+    <span class="f-serif text-xl font-bold blink">אריה גולדמן</span>
+    <button id="nav-close" class="w-10 h-10 flex items-center justify-center bg-ink text-cream rounded-md text-lg">✕</button>
+  </div>
+  <div class="flex-1 flex flex-col justify-center px-8 gap-0.5">
+    <a href="#about"      class="m-lnk f-serif text-4xl py-4 border-b border-olive/12 flex items-center gap-3"><span class="f-mono text-xs text-terra">// 01</span>אודות</a>
+    <a href="#experience" class="m-lnk f-serif text-4xl py-4 border-b border-olive/12 flex items-center gap-3"><span class="f-mono text-xs text-terra">// 02</span>ניסיון</a>
+    <a href="#projects"   class="m-lnk f-serif text-4xl py-4 border-b border-olive/12 flex items-center gap-3"><span class="f-mono text-xs text-terra">// 03</span>פרויקטים</a>
+    <a href="#contact"    class="m-lnk btn-p mt-8 text-base">בואו נדבר ←</a>
+  </div>
+</div>
 
-        <div class="hero-image">
-            <div class="profile-wrapper">
-                <div class="profile-ring-outer"></div>
-                <div class="profile-img" id="profileImgContainer">
-                    <img
-                        src="profile.jpg"
-                        alt="אריה גולדמן"
-                        id="profileImg"
-                        onerror="document.getElementById('profileFallback').style.display='block'; this.style.display='none';"
-                    >
-                    <span class="profile-fallback" id="profileFallback">👨‍💻</span>
-                </div>
-                <div class="floating-badge badge-tl">🎖️ יחידת 8200</div>
-                <div class="floating-badge badge-bl">🤖 AI &amp; ERP Expert</div>
-            </div>
+<main>
+
+<!-- ══════════════════════════════════
+     HERO
+══════════════════════════════════ -->
+<section id="top" class="pt-8 pb-14 md:pt-14 md:pb-20 px-5 md:px-8">
+<div class="max-w-5xl mx-auto">
+
+  <div class="coords a1 mb-8">
+    <span>X: 31.7683°N</span>
+    <span>Y: 35.2137°E</span>
+    <span>JERUSALEM / IL</span>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-10 items-center">
+
+    <!-- Portrait: first on mobile, second on desktop -->
+    <div class="md:col-span-5 md:order-2 order-1 a3 flex justify-center" style="padding-block:12px">
+      <div class="portrait-host">
+        <div class="portrait-halo"></div>
+        <div class="portrait-ring">
+          <img src="/profile3.png" alt="אריה גולדמן — תמונת פרופיל">
         </div>
+        <!-- Single orbit ring: 3 rotating Hebrew phrases via SVG textPath -->
+        <svg class="orbit-svg" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <!-- Full circle path: center (150,150), radius 133 -->
+            <path id="orb" d="M150,17 A133,133,0,1,1,149.99,17"/>
+          </defs>
+          <text
+            font-size="12"
+            fill="#C8553D"
+            font-family="'Assistant', sans-serif"
+            font-weight="700"
+            letter-spacing="1.4">
+            <textPath href="#orb">◆  תעודת הצטיינות 8200           ◆  מבחר כלי AI           ◆  זמינות מידית           </textPath>
+          </text>
+        </svg>
+      </div>
     </div>
+
+    <!-- Headline: second on mobile, first on desktop -->
+    <div class="md:col-span-7 md:order-1 order-2">
+
+      <h1 class="f-serif a2 leading-[.9] font-bold tracking-tight"
+          style="font-size:clamp(46px,8.5vw,90px);letter-spacing:-.025em">
+        מומחה<br>
+        <span class="grad font-black">ERP</span><br>
+        ושילוב<br>
+        <span class="text-olive italic" style="font-weight:400">AI</span> בארגון.
+      </h1>
+
+      <p class="f-serif a3 italic text-olive mt-5 leading-snug"
+         style="font-size:clamp(17px,2.3vw,24px)">
+        עשור של ניסיון, שש מערכות ממשלתיות,<br class="hidden md:block">
+        ושלושה פרויקטי AI שמשנים תהליכים.
+      </p>
+
+      <div class="a4 mt-6">
+        <span class="pill"><span class="dot"></span>זמין לפרויקטים</span>
+      </div>
+
+      <div class="a5 mt-6 flex flex-col sm:flex-row gap-3">
+        <a href="#projects" class="btn-p min-h-[50px]">פרויקטים נבחרים ←</a>
+        <a href="#contact"  class="btn-o min-h-[50px]">יצירת קשר</a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── STATS STRIP ── -->
+  <div class="mt-14 md:mt-20 grid grid-cols-2 md:grid-cols-4 gap-px bg-olive/20 border border-olive/20 a5">
+    <div class="bg-cream/75 backdrop-blur p-5 relative">
+      <span class="absolute top-2 right-2 f-mono text-[9px] text-terra">// 01</span>
+      <div class="f-mono text-4xl font-bold text-terra">10</div>
+      <div class="f-mono text-[9px] text-olive mt-2 tracking-widest">שנות ERP</div>
+    </div>
+    <div class="bg-cream/75 backdrop-blur p-5 relative">
+      <span class="absolute top-2 right-2 f-mono text-[9px] text-terra">// 02</span>
+      <div class="f-mono text-4xl font-bold text-ochre">06</div>
+      <div class="f-mono text-[9px] text-olive mt-2 tracking-widest">ארגונים</div>
+    </div>
+    <div class="bg-cream/75 backdrop-blur p-5 relative">
+      <span class="absolute top-2 right-2 f-mono text-[9px] text-terra">// 03</span>
+      <div class="f-mono text-4xl font-bold text-olive">03</div>
+      <div class="f-mono text-[9px] text-olive mt-2 tracking-widest">פרויקטי AI</div>
+    </div>
+    <div class="bg-cream/75 backdrop-blur p-5 relative">
+      <span class="absolute top-2 right-2 f-mono text-[9px] text-terra">// 04</span>
+      <div class="f-mono text-4xl font-bold text-ink">05</div>
+      <div class="f-mono text-[9px] text-olive mt-2 tracking-widest">תעודות</div>
+    </div>
+  </div>
+
+</div>
 </section>
 
-<!-- ─── SKILLS ─── -->
-<section id="skills">
-    <div class="fade-in">
-        <div class="section-header">
-            <div class="section-tag">⚙️ TECHNICAL SKILLS</div>
-            <h2 class="section-title">מיומנויות טכנולוגיות</h2>
-            <div class="section-divider"></div>
-        </div>
-        <div class="skills-grid">
-            <div class="skill-card">
-                <div class="skill-icon">📊</div>
-                <div class="skill-name">Excel &amp; Power Query</div>
-                <div class="skill-level">מומחה</div>
-                <div class="skill-bar"><div class="skill-bar-fill" data-width="95"></div></div>
-            </div>
-            <div class="skill-card">
-                <div class="skill-icon">🗄️</div>
-                <div class="skill-name">SQL</div>
-                <div class="skill-level">רמה גבוהה</div>
-                <div class="skill-bar"><div class="skill-bar-fill" data-width="90"></div></div>
-            </div>
-            <div class="skill-card">
-                <div class="skill-icon">⚙️</div>
-                <div class="skill-name">SAP ERP</div>
-                <div class="skill-level">מומחה</div>
-                <div class="skill-bar"><div class="skill-bar-fill" data-width="93"></div></div>
-            </div>
-            <div class="skill-card">
-                <div class="skill-icon">🤖</div>
-                <div class="skill-name">AI Tools</div>
-                <div class="skill-level">מתקדם</div>
-                <div class="skill-bar"><div class="skill-bar-fill" data-width="85"></div></div>
-            </div>
-            <div class="skill-card">
-                <div class="skill-icon">📈</div>
-                <div class="skill-name">Crystal Reports &amp; BI</div>
-                <div class="skill-level">מתקדם</div>
-                <div class="skill-bar"><div class="skill-bar-fill" data-width="82"></div></div>
-            </div>
-            <div class="skill-card">
-                <div class="skill-icon">🔗</div>
-                <div class="skill-name">System Integration</div>
-                <div class="skill-level">מתקדם</div>
-                <div class="skill-bar"><div class="skill-bar-fill" data-width="80"></div></div>
-            </div>
-        </div>
+
+<!-- ══════════════════════════════════
+     ABOUT
+══════════════════════════════════ -->
+<section id="about" class="py-16 md:py-24 px-5 md:px-8 border-t border-olive/12">
+<div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-14 items-start">
+
+  <div class="md:col-span-4 reveal">
+    <div class="sec-lbl mb-5"><span class="dot"></span>01 · אודות</div>
+    <div class="f-mono text-7xl font-bold text-terra leading-none select-none">01</div>
+    <div class="f-mono text-[9px] text-olive tracking-widest mt-2">ABOUT.ME</div>
+  </div>
+
+  <div class="md:col-span-8 reveal reveal-d1 space-y-5">
+    <p class="f-serif text-xl md:text-2xl font-medium text-ink leading-snug">
+      מהנדס תעשיה וניהול עם עשור של ניסיון ביישום מערכות ERP בארגונים ממשלתיים וציבוריים.
+    </p>
+    <p class="text-[15.5px] leading-relaxed text-ink/80">
+      התמחיתי בהטמעת SAP מרכב״ה במשרד האוצר, SAP B1 בחברת זיו מערכות, ובמערכות ליבה עבור חברת הגיחון ומשטרת ישראל — כל פרויקט עם האתגרים, הלו״ז ורגישויות הנתונים שלו.
+    </p>
+    <p class="text-[15.5px] leading-relaxed text-ink/80">
+      בשנים האחרונות אני מגשר בין הידע הארגוני העמוק לכלי הבינה המלאכותית: בניתי מערכת RAG בעברית, סוכנים אוטונומיים ופלטפורמת תרגום. אני לא "מהנדס AI גנרי" — אני מבין את הצד הארגוני, ולכן יודע איפה AI באמת עוזר.
+    </p>
+    <div class="flex items-center gap-3 pt-1">
+      <span class="dot"></span>
+      <span class="f-mono text-xs text-olive">ירושלים, ישראל · זמין לפרויקטים</span>
     </div>
+  </div>
+
+</div>
 </section>
 
-<!-- ─── EXPERIENCE ─── -->
-<section id="experience">
-    <div class="fade-in">
-        <div class="section-header">
-            <div class="section-tag">💼 WORK EXPERIENCE</div>
-            <h2 class="section-title">ניסיון תעסוקתי</h2>
-            <div class="section-divider"></div>
-        </div>
-        <div class="timeline">
 
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-card">
-                    <div class="timeline-date">2024 – 2025</div>
-                    <div class="timeline-title">אזרח על תקן קצין טכנולוגי – מחלקת תקציבים</div>
-                    <div class="timeline-company">משטרת ישראל</div>
-                    <ul class="timeline-bullets">
-                        <li>ליווי מקצועי טכנולוגי לקצינים במחלקת התקציבים במטה הארצי, ייעול תהליכי עבודה והפקת דוחות מהמערכות</li>
-                        <li>עבודה שוטפת במערכת ERP — מודולים לוגיסטיים ותקציביים — לניהול ובקרה על העברות תקציב, הסכמים והזמנות</li>
-                        <li>שימוש במערכות BI לשליפת נתונים בפילוחים שונים, בעיקר בתחומי הדלק ושירותי ההסעדה</li>
-                        <li>בניית דשבורדים וגיליונות Excel מורכבים עם תהליכי אוטומציה Power Query להפקת דוחות חיוניים</li>
-                        <li>ביצוע אינטגרציה מול ממשקים חיצוניים לעדכון מודלים בתחומי מים, חשמל והסעים</li>
-                    </ul>
-                </div>
-            </div>
+<!-- ══════════════════════════════════
+     EXPERTISE
+══════════════════════════════════ -->
+<section id="expertise" class="py-16 md:py-24 px-5 md:px-8 border-t border-olive/12" style="background:rgba(237,227,206,.28)">
+<div class="max-w-5xl mx-auto">
 
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-card">
-                    <div class="timeline-date">2021 – 2023</div>
-                    <div class="timeline-title">יישום ותחזוקת מערכת ERP SBO</div>
-                    <div class="timeline-company">חברת זיו מערכות</div>
-                    <ul class="timeline-bullets">
-                        <li>ביצוע התאמות ללקוחות על סמך מסמכי אפיון: הוספה ועדכון שדות וטבלאות, התאמת מסכי UI ותהליכים</li>
-                        <li>ביצוע הסבות וטעינת נתונים באמצעות DTW — Data Transfer Workbench, SQL ו-CSV</li>
-                        <li>בניית דוחות SQL מתקדמים מותאמים אישית והצגתם ב-Crystal Reports</li>
-                        <li>ביצוע אינטגרציה מול מערכות BI, חתימות דיגיטליות, SMS, דואר אלקטרוני ומסבים לספקים</li>
-                    </ul>
-                </div>
-            </div>
+  <div class="sec-lbl mb-5 reveal"><span class="dot"></span>02 · מומחיות</div>
+  <h2 class="f-serif text-3xl md:text-5xl font-bold mb-10 reveal" style="line-height:.95;letter-spacing:-.02em">
+    שלושה תחומים,<br><span class="grad">סיפור אחד</span>.
+  </h2>
 
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-card">
-                    <div class="timeline-date">2020 – 2021</div>
-                    <div class="timeline-title">יישום, תמיכה והטמעת מערכת הליבה</div>
-                    <div class="timeline-company">חברת הגיחון</div>
-                    <ul class="timeline-bullets">
-                        <li>ביצוע יישום וקסטומיזציה, העברת טרנספורטים לייצור, בקרת ג'ובים וממשקים, עדכון טבלאות תחזוקה</li>
-                        <li>פתרון תקלות במודולים השונים והעברה לצוות הפיתוח בעת הצורך</li>
-                        <li>הקמה, ניטור וסגירת משתמשים, בניית הרשאות ושיוכן לתפקידים ולרמות הארגוניות</li>
-                    </ul>
-                </div>
-            </div>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
 
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-card">
-                    <div class="timeline-date">2018 – 2020</div>
-                    <div class="timeline-title">אחראי מערכת אגף שיקום (בתקן מנתח מערכות)</div>
-                    <div class="timeline-company">משרד הבריאות</div>
-                    <ul class="timeline-bullets">
-                        <li>העלאה לאוויר של המערכת החדשה וכתיבת מסמכי דרישות לצוות הפיתוח על סמך צרכים מהשטח</li>
-                        <li>בקרה על קבצי ממשקים נכנסים ויוצאים מול מערכות אחרות</li>
-                        <li>תמיכה שוטפת בתפעול המערכת לכלל העובדים, הקמת משתמשים ומתן הרשאות</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-card">
-                    <div class="timeline-date">2013 – 2017</div>
-                    <div class="timeline-title">תומך ומטמיע SAP מערכת מרכב"ה</div>
-                    <div class="timeline-company">משרד האוצר</div>
-                    <ul class="timeline-bullets">
-                        <li>תמיכה וסיוע למשתמשי המערכת בכל משרדי הממשלה</li>
-                        <li>כתיבת מדריכים ומצגות, ביצוע הדרכות קבוצתיות ואישיות, הכשרת והסמכת רפרנטים חדשים במודול הלוגיסטי</li>
-                        <li>ריכוז ועדות קסטומיזציה לבעיות ודרישות שינויים (שושים) מהמשתמשים מול צוות היישום והפיתוח</li>
-                    </ul>
-                </div>
-            </div>
-
-        </div>
+    <div class="card reveal reveal-d1">
+      <div class="flex justify-between items-start mb-5">
+        <div class="ico">🗄️</div>
+        <span class="f-mono text-[10px] text-terra">// 01</span>
+      </div>
+      <h3 class="f-serif text-2xl font-bold">מערכות ERP</h3>
+      <p class="text-mocha mt-3 text-[13.5px] leading-relaxed">
+        SAP מרכב״ה · SAP B1 · CRM Dynamics 365 · ניהול תהליכים עסקיים בסביבות ממשלתיות ומסחריות.
+      </p>
     </div>
+
+    <div class="card reveal reveal-d2">
+      <div class="flex justify-between items-start mb-5">
+        <div class="ico">✨</div>
+        <span class="f-mono text-[10px] text-terra">// 02</span>
+      </div>
+      <h3 class="f-serif text-2xl font-bold">שילוב AI</h3>
+      <p class="text-mocha mt-3 text-[13.5px] leading-relaxed">
+        RAG בעברית · סוכנים אוטונומיים · תרגום חכם · Claude API · Python · Prompt Engineering.
+      </p>
+    </div>
+
+    <div class="card reveal reveal-d3">
+      <div class="flex justify-between items-start mb-5">
+        <div class="ico">📊</div>
+        <span class="f-mono text-[10px] text-terra">// 03</span>
+      </div>
+      <h3 class="f-serif text-2xl font-bold">דאטה ואוטומציה</h3>
+      <p class="text-mocha mt-3 text-[13.5px] leading-relaxed">
+        SQL מתקדם · Power BI · ETL · אינטגרציות · אוטומציה של תהליכים חוצי-מערכות.
+      </p>
+    </div>
+
+  </div>
+</div>
 </section>
 
-<!-- ─── EDUCATION ─── -->
-<section id="education">
-    <div class="fade-in">
-        <div class="section-header">
-            <div class="section-tag">🎓 EDUCATION</div>
-            <h2 class="section-title">השכלה ולימודים</h2>
-            <div class="section-divider"></div>
-        </div>
 
-        <div class="edu-grid">
-            <div class="edu-card">
-                <div class="edu-year">2008 – 2012</div>
-                <div class="edu-degree">🎓 מהנדס תעשיה וניהול B.Sc</div>
-                <div class="edu-school">מכון לב</div>
-                <div class="edu-field">במגמת מערכות מידע</div>
-            </div>
-            <div class="edu-card">
-                <div class="edu-year">2002 – 2007</div>
-                <div class="edu-degree">🎓 תואר ראשון B.Ed</div>
-                <div class="edu-school">מכללת לפשיץ</div>
-                <div class="edu-field">מדעי המחשב ומתמטיקה + תעודת הוראה</div>
-            </div>
-            <div class="edu-card" style="--accent-end: var(--primary)">
-                <div class="edu-year">2004 – 2005</div>
-                <div class="edu-degree">🎖️ שרות צבאי — חיל המודיעין</div>
-                <div class="edu-school">יחידת 8200</div>
-                <div class="edu-field">שרות במסגרת "ההסדר" + תעודת הצטיינות</div>
-            </div>
-        </div>
+<!-- ══════════════════════════════════
+     EXPERIENCE
+══════════════════════════════════ -->
+<section id="experience" class="py-16 md:py-24 px-5 md:px-8 border-t border-olive/12">
+<div class="max-w-5xl mx-auto">
 
-        <div class="section-header" style="margin-top: 2.5rem;">
-            <div class="section-tag">📚 COURSES</div>
-            <h3 style="font-size:1.4rem; font-weight:700; color:#c4b5fd; margin-bottom:1.5rem;">קורסים מקצועיים</h3>
-        </div>
-        <div class="courses-grid">
-            <div class="course-card">
-                <div class="course-year-badge">2024</div>
-                <div>
-                    <div class="course-name">קורס בינה מלאכותית (AI)</div>
-                    <div class="course-org">המרכז הבינלאומי ללימודי הייטק וחדשנות</div>
-                </div>
-            </div>
-            <div class="course-card">
-                <div class="course-year-badge">2022</div>
-                <div>
-                    <div class="course-name">Advanced SQL Data Analysis</div>
-                    <div class="course-org">Ram Kedem</div>
-                </div>
-            </div>
-            <div class="course-card">
-                <div class="course-year-badge">2020</div>
-                <div>
-                    <div class="course-name">קורס יישום SAP R/3 — מודולים MM + FI</div>
-                    <div class="course-org">מכללת INT</div>
-                </div>
-            </div>
-            <div class="course-card">
-                <div class="course-year-badge">2018</div>
-                <div>
-                    <div class="course-name">קורס יישום C.R.M Dynamics 365</div>
-                    <div class="course-org">מכללת INT</div>
-                </div>
-            </div>
-        </div>
+  <div class="sec-lbl mb-5 reveal"><span class="dot"></span>03 · ניסיון</div>
+  <h2 class="f-serif text-3xl md:text-5xl font-bold mb-10 reveal" style="line-height:.95;letter-spacing:-.02em">
+    עשור של<br><span class="grad">יישום בשטח</span>.
+  </h2>
+
+  <div class="reveal">
+
+    <div class="exp-row">
+      <div>
+        <h3 class="f-serif text-xl font-bold">אזרח על תקן קצין טכנולוגי — מחלקת תקציבים</h3>
+        <p class="text-olive font-semibold mt-0.5 text-[14.5px]">משטרת ישראל</p>
+      </div>
+      <div class="f-mono text-xs text-terra shrink-0 pt-1" dir="ltr">2024 – 2025</div>
     </div>
+
+    <div class="exp-row">
+      <div>
+        <h3 class="f-serif text-xl font-bold">יישום ותחזוקת מערכת SAP B1</h3>
+        <p class="text-olive font-semibold mt-0.5 text-[14.5px]">חברת זיו מערכות</p>
+      </div>
+      <div class="f-mono text-xs text-terra shrink-0 pt-1" dir="ltr">2021 – 2023</div>
+    </div>
+
+    <div class="exp-row">
+      <div>
+        <h3 class="f-serif text-xl font-bold">יישום, תמיכה והטמעת מערכת הליבה</h3>
+        <p class="text-olive font-semibold mt-0.5 text-[14.5px]">חברת הגיחון</p>
+      </div>
+      <div class="f-mono text-xs text-terra shrink-0 pt-1" dir="ltr">2020 – 2021</div>
+    </div>
+
+    <div class="exp-row">
+      <div>
+        <h3 class="f-serif text-xl font-bold">אחראי מערכת אגף שיקום (מנתח מערכות)</h3>
+        <p class="text-olive font-semibold mt-0.5 text-[14.5px]">משרד הבריאות</p>
+      </div>
+      <div class="f-mono text-xs text-terra shrink-0 pt-1" dir="ltr">2018 – 2020</div>
+    </div>
+
+    <div class="exp-row">
+      <div>
+        <h3 class="f-serif text-xl font-bold">תומך ומטמיע SAP מרכב״ה</h3>
+        <p class="text-olive font-semibold mt-0.5 text-[14.5px]">משרד האוצר</p>
+      </div>
+      <div class="f-mono text-xs text-terra shrink-0 pt-1" dir="ltr">2013 – 2017</div>
+    </div>
+
+    <div class="exp-row">
+      <div>
+        <h3 class="f-serif text-xl font-bold">שירות צבאי — חיל המודיעין</h3>
+        <p class="text-olive font-semibold mt-0.5 text-[14.5px]">
+          יחידת 8200 · <span class="text-terra">תעודת הצטיינות</span>
+        </p>
+      </div>
+      <div class="f-mono text-xs text-terra shrink-0 pt-1" dir="ltr">2004 – 2005</div>
+    </div>
+
+  </div>
+</div>
 </section>
 
-<!-- ─── PROJECTS ─── -->
-<section id="projects">
-    <div class="fade-in">
-        <div class="section-header">
-            <div class="section-tag">🚀 PROJECTS ON RAILWAY</div>
-            <h2 class="section-title">הפרויקטים שלי</h2>
-            <p class="section-desc">פרויקטים פעילים המאוחסנים ב-GitHub ומופעלים על Railway</p>
-            <div class="section-divider"></div>
-        </div>
-        <div class="projects-grid" id="projectsGrid">
 
-            <!-- ════ PROJECT CARDS — ערוך כאן את הפרויקטים ════
-                 להוסיף פרויקט: העתק card אחד, עדכן href, כותרת, תיאור וטכנולוגיות
-                 לפרויקט חי: שנה status-soon ל status-live
-            ═══════════════════════════════════════════════════ -->
+<!-- ══════════════════════════════════
+     EDUCATION + COURSES
+══════════════════════════════════ -->
+<section id="education" class="py-16 md:py-24 px-5 md:px-8 border-t border-olive/12" style="background:rgba(237,227,206,.28)">
+<div class="max-w-5xl mx-auto">
 
-            <a href="#" class="project-card">
-                <div class="project-card-top">
-                    <span class="project-status status-soon">⏳ בקרוב</span>
-                    <span class="project-arrow">↗</span>
-                </div>
-                <div class="project-icon">🌐</div>
-                <div class="project-title">פרויקט 1</div>
-                <div class="project-desc">
-                    עדכן את שם ותיאור הפרויקט כאן. הוסף קישור Railway ב-href.
-                </div>
-                <div class="project-tech">
-                    <span class="tech-tag">Python</span>
-                    <span class="tech-tag">Railway</span>
-                    <span class="tech-tag">GitHub</span>
-                </div>
-            </a>
+  <div class="sec-lbl mb-5 reveal"><span class="dot"></span>04 · השכלה וקורסים</div>
+  <h2 class="f-serif text-3xl md:text-4xl font-bold mb-10 reveal" style="line-height:.95;letter-spacing:-.02em">
+    בסיס אקדמי<br><span class="grad">ולמידה מתמשכת</span>.
+  </h2>
 
-            <a href="#" class="project-card">
-                <div class="project-card-top">
-                    <span class="project-status status-soon">⏳ בקרוב</span>
-                    <span class="project-arrow">↗</span>
-                </div>
-                <div class="project-icon">🤖</div>
-                <div class="project-title">פרויקט 2</div>
-                <div class="project-desc">
-                    עדכן את שם ותיאור הפרויקט כאן. הוסף קישור Railway ב-href.
-                </div>
-                <div class="project-tech">
-                    <span class="tech-tag">JavaScript</span>
-                    <span class="tech-tag">Railway</span>
-                    <span class="tech-tag">Node.js</span>
-                </div>
-            </a>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
 
-            <a href="#" class="project-card">
-                <div class="project-card-top">
-                    <span class="project-status status-soon">⏳ בקרוב</span>
-                    <span class="project-arrow">↗</span>
-                </div>
-                <div class="project-icon">📊</div>
-                <div class="project-title">פרויקט 3</div>
-                <div class="project-desc">
-                    עדכן את שם ותיאור הפרויקט כאן. הוסף קישור Railway ב-href.
-                </div>
-                <div class="project-tech">
-                    <span class="tech-tag">SQL</span>
-                    <span class="tech-tag">Railway</span>
-                    <span class="tech-tag">Data</span>
-                </div>
-            </a>
-
-        </div>
+    <!-- Degrees -->
+    <div class="reveal">
+      <div class="f-mono text-[9.5px] text-olive tracking-widest mb-6">// תארים אקדמיים</div>
+      <div class="edu-block">
+        <div class="f-mono text-xs text-terra" dir="ltr">2008 – 2012</div>
+        <div class="f-serif text-lg font-bold mt-1">B.Sc הנדסת תעשיה וניהול</div>
+        <div class="text-olive text-sm font-semibold">מכון לב · מערכות מידע</div>
+      </div>
+      <div class="edu-block">
+        <div class="f-mono text-xs text-terra" dir="ltr">2002 – 2007</div>
+        <div class="f-serif text-lg font-bold mt-1">B.Ed + תעודת הוראה</div>
+        <div class="text-olive text-sm font-semibold">מכללת ליפשיץ · מדעי המחשב + מתמטיקה</div>
+      </div>
     </div>
+
+    <!-- Courses -->
+    <div class="reveal reveal-d1">
+      <div class="f-mono text-[9.5px] text-olive tracking-widest mb-6">// קורסים</div>
+      <div class="course-row">
+        <div>
+          <div class="font-semibold">קורס בינה מלאכותית (AI)</div>
+          <div class="text-sm text-mocha">המרכז הבינלאומי ללימודי הייטק</div>
+        </div>
+        <div class="f-mono text-xs text-terra shrink-0">2024</div>
+      </div>
+      <div class="course-row">
+        <div>
+          <div class="font-semibold">Advanced SQL Data Analysis</div>
+          <div class="text-sm text-mocha">Ram Kedem</div>
+        </div>
+        <div class="f-mono text-xs text-terra shrink-0">2022</div>
+      </div>
+      <div class="course-row">
+        <div>
+          <div class="font-semibold">יישום SAP R/3 — MM + FI</div>
+          <div class="text-sm text-mocha">מכללת INT</div>
+        </div>
+        <div class="f-mono text-xs text-terra shrink-0">2020</div>
+      </div>
+      <div class="course-row">
+        <div>
+          <div class="font-semibold">יישום C.R.M Dynamics 365</div>
+          <div class="text-sm text-mocha">מכללת INT</div>
+        </div>
+        <div class="f-mono text-xs text-terra shrink-0">2018</div>
+      </div>
+    </div>
+
+  </div>
+</div>
 </section>
 
-<!-- ─── FOOTER ─── -->
-<footer>
-    <div class="footer-name">אריה גולדמן</div>
-    <p style="color: var(--text-muted); font-size: 0.88rem;">מהנדס מערכות ERP &amp; מומחה AI · ירושלים</p>
-    <div class="footer-links">
-        <a href="mailto:goldmanarie@gmail.com">📧 goldmanarie@gmail.com</a>
-        <a href="tel:0545320855">📱 054-5320855</a>
-        <a href="https://www.linkedin.com/in/Arie" target="_blank" rel="noopener">💼 LinkedIn</a>
+
+<!-- ══════════════════════════════════
+     CERTIFICATES
+══════════════════════════════════ -->
+<section id="certificates" class="py-16 md:py-24 px-5 md:px-8 border-t border-olive/12">
+<div class="max-w-5xl mx-auto">
+  <div class="sec-lbl mb-5 reveal"><span class="dot"></span>05 · תעודות</div>
+  <h2 class="f-serif text-3xl md:text-4xl font-bold mb-10 reveal" style="line-height:.95;letter-spacing:-.02em">
+    הכישורים<br><span class="grad">מאומתים</span>.
+  </h2>
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 reveal">
+    <div class="cert-card" onclick="openLb('/Certificate/הצטיינות 8200.png')">
+      <img src="/Certificate/הצטיינות 8200.png" alt="תעודת הצטיינות 8200" loading="lazy">
+      <div class="cert-lbl">הצטיינות 8200</div>
     </div>
-    <div class="footer-copy">© 2025 Arie Goldman · Built with Claude · Deployed on Railway</div>
+    <div class="cert-card" onclick="openLb('/Certificate/מהנדס תעשיה וניהול.png')">
+      <img src="/Certificate/מהנדס תעשיה וניהול.png" alt="B.Sc הנדסת תעשיה וניהול" loading="lazy">
+      <div class="cert-lbl">B.Sc הנדסה</div>
+    </div>
+    <div class="cert-card" onclick="openLb('/Certificate/מיישם SAP.png')">
+      <img src="/Certificate/מיישם SAP.png" alt="מיישם SAP" loading="lazy">
+      <div class="cert-lbl">מיישם SAP</div>
+    </div>
+    <div class="cert-card" onclick="openLb('/Certificate/קורס מפתחי AI.png')">
+      <img src="/Certificate/קורס מפתחי AI.png" alt="קורס מפתחי AI" loading="lazy">
+      <div class="cert-lbl">מפתחי AI</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- Lightbox -->
+<div id="lb" role="dialog" aria-modal="true" aria-label="תצוגת תעודה">
+  <button id="lb-x" onclick="closeLb()" aria-label="סגור">✕</button>
+  <img id="lb-img" src="" alt="תעודה מוגדלת">
+</div>
+
+
+<!-- ══════════════════════════════════
+     PROJECTS
+══════════════════════════════════ -->
+<section id="projects" class="py-16 md:py-24 px-5 md:px-8 border-t border-olive/12" style="background:rgba(237,227,206,.28)">
+<div class="max-w-5xl mx-auto">
+  <div class="sec-lbl mb-5 reveal"><span class="dot"></span>06 · פרויקטים</div>
+  <h2 class="f-serif text-3xl md:text-5xl font-bold mb-10 reveal" style="line-height:.95;letter-spacing:-.02em">
+    AI בעברית,<br><span class="grad">שמשנה תהליכים</span>.
+  </h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+
+    <a href="#" class="proj-card reveal">
+      <div class="proj-num">// פרויקט 01</div>
+      <h3 class="f-serif text-xl font-bold">פלטפורמת תרגום AI</h3>
+      <p class="text-mocha text-sm mt-3 leading-relaxed">
+        פלטפורמת תרגום מבוססת AI — עברית ↔ אנגלית. עיבוד שפה מתקדם, ממשק אינטואיטיבי, זרימת עבודה לשוניות.
+      </p>
+      <div class="mt-4 flex flex-wrap">
+        <span class="tag">Python</span><span class="tag">Claude API</span><span class="tag">NLP</span>
+      </div>
+      <div class="f-mono text-xs text-terra mt-4">לפרויקט ←</div>
+    </a>
+
+    <a href="#" class="proj-card reveal reveal-d1">
+      <div class="proj-num">// פרויקט 02</div>
+      <h3 class="f-serif text-xl font-bold">מערכת RAG — הלכה</h3>
+      <p class="text-mocha text-sm mt-3 leading-relaxed">
+        RAG מעל קיצור שולחן ערוך עם הצגת ציטוט המקור. עברית NLP, בסיס ידע וקטורי, אימות הלכתי.
+      </p>
+      <div class="mt-4 flex flex-wrap">
+        <span class="tag">RAG</span><span class="tag">Vector DB</span><span class="tag">עברית</span>
+      </div>
+      <div class="f-mono text-xs text-terra mt-4">לפרויקט ←</div>
+    </a>
+
+    <a href="#" class="proj-card reveal reveal-d2">
+      <div class="proj-num">// פרויקט 03</div>
+      <h3 class="f-serif text-xl font-bold">סוכני Trend AI</h3>
+      <p class="text-mocha text-sm mt-3 leading-relaxed">
+        סוכנים אוטונומיים שמזהים מגמות לפי נושא בזמן אמת. מוניטורינג, שליפה ודיווח אוטומטי.
+      </p>
+      <div class="mt-4 flex flex-wrap">
+        <span class="tag">Agents</span><span class="tag">Automation</span><span class="tag">API</span>
+      </div>
+      <div class="f-mono text-xs text-terra mt-4">לפרויקט ←</div>
+    </a>
+
+  </div>
+</div>
+</section>
+
+
+<!-- ══════════════════════════════════
+     VIDEO
+══════════════════════════════════ -->
+<section id="video" class="py-16 md:py-24 px-5 md:px-8 border-t border-olive/12">
+<div class="max-w-5xl mx-auto">
+  <div class="sec-lbl mb-5 reveal"><span class="dot"></span>07 · סרטון</div>
+  <h2 class="f-serif text-3xl md:text-4xl font-bold mb-10 reveal" style="line-height:.95;letter-spacing:-.02em">
+    בינה מלאכותית —<br><span class="grad">מסביר בעצמי</span>.
+  </h2>
+  <div class="flex justify-center reveal">
+    <div class="video-shell" style="width:min(320px,84vw)">
+      <div style="position:relative;padding-bottom:177.78%;height:0">
+        <iframe
+          src="https://www.youtube.com/embed/2I9Sk1MOnOk"
+          style="position:absolute;top:0;left:0;width:100%;height:100%;border:none"
+          allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"
+          allowfullscreen
+          loading="lazy"
+          title="אריה גולדמן מסביר על בינה מלאכותית">
+        </iframe>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+
+<!-- ══════════════════════════════════
+     CONTACT
+══════════════════════════════════ -->
+<section id="contact" class="py-16 md:py-24 px-5 md:px-8 relative overflow-hidden border-t border-olive/20" style="background:#1C2418;color:#F2EAD9">
+  <!-- Ambient glows inside contact -->
+  <div style="position:absolute;top:0;right:0;width:500px;height:500px;pointer-events:none;background:radial-gradient(circle,rgba(212,162,76,.2),transparent 60%)"></div>
+  <div style="position:absolute;bottom:0;left:0;width:400px;height:400px;pointer-events:none;background:radial-gradient(circle,rgba(200,85,61,.15),transparent 60%)"></div>
+
+  <div class="max-w-5xl mx-auto relative">
+    <div class="sec-lbl mb-5 reveal" style="color:rgba(242,234,217,.55)">
+      <span class="dot gold"></span>08 · קשר
+    </div>
+    <h2 class="f-serif text-4xl md:text-6xl font-bold leading-[.95] max-w-2xl reveal" style="letter-spacing:-.025em">
+      בואו נעשה<br>
+      <span class="grad">משהו טוב</span> ביחד.
+    </h2>
+    <div class="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-2xl reveal">
+      <a href="mailto:goldmanarie@gmail.com" class="c-link">
+        <div class="f-mono text-[9.5px] text-ochre tracking-widest">// מייל</div>
+        <div class="f-serif font-bold text-base mt-1.5 break-all">goldmanarie@gmail.com</div>
+      </a>
+      <a href="tel:+972545320855" class="c-link">
+        <div class="f-mono text-[9.5px] text-ochre tracking-widest">// טלפון</div>
+        <div class="f-serif font-bold text-lg mt-1.5 f-mono" dir="ltr">054-5320855</div>
+      </a>
+      <a href="https://www.linkedin.com/in/arie-goldman-12a737204" target="_blank" rel="noopener" class="c-link">
+        <div class="f-mono text-[9.5px] text-ochre tracking-widest">// לינקדאין</div>
+        <div class="f-serif font-bold text-base mt-1.5">פרופיל LinkedIn ←</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ══════ FOOTER ══════ -->
+<footer style="background:#1C2418;color:rgba(242,234,217,.5);border-top:1px solid rgba(242,234,217,.07);padding:24px 20px">
+  <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+    <span class="f-mono text-xs">© 2026 אריה גולדמן · goldmanarie.com</span>
+    <div class="flex items-center gap-2 f-mono text-xs" style="color:rgba(242,234,217,.3)">
+      <span class="dot gold" style="width:5px;height:5px;animation:none;box-shadow:none;background:#D4A24C;opacity:.7"></span>
+      SYS://ARIE.OS · v2026.05
+    </div>
+  </div>
 </footer>
 
+
 <script>
-    // ─── Scroll-triggered fade-in ───
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
-        });
-    }, { threshold: 0.1 });
+/* ── Mobile menu ── */
+const mmenu = document.getElementById('m-menu');
+const openB = document.getElementById('nav-open');
+const closeB= document.getElementById('nav-close');
 
-    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+function openMenu()  { mmenu.classList.add('open');    document.body.style.overflow = 'hidden'; }
+function closeMenu() { mmenu.classList.remove('open'); document.body.style.overflow = ''; }
 
-    // ─── Skill bar animation ───
-    const skillObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.querySelectorAll('.skill-bar-fill').forEach(bar => {
-                    bar.style.width = bar.dataset.width + '%';
-                });
-            }
-        });
-    }, { threshold: 0.3 });
+openB.addEventListener('click', openMenu);
+closeB.addEventListener('click', closeMenu);
+document.querySelectorAll('.m-lnk').forEach(l => l.addEventListener('click', closeMenu));
 
-    document.querySelectorAll('#skills').forEach(el => skillObserver.observe(el));
+/* ── Scroll reveal ── */
+const revealObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); revealObs.unobserve(e.target); }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -28px 0px' });
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 
-    // ─── Smooth scroll ───
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-        a.addEventListener('click', e => {
-            const target = document.querySelector(a.getAttribute('href'));
-            if (target) {
-                e.preventDefault();
-                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-        });
-    });
+/* ── Certificate lightbox ── */
+const lb    = document.getElementById('lb');
+const lbImg = document.getElementById('lb-img');
 
-    // ─── Nav active state ───
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-links a');
-
-    window.addEventListener('scroll', () => {
-        let current = '';
-        sections.forEach(section => {
-            if (window.scrollY >= section.offsetTop - 120) {
-                current = section.getAttribute('id');
-            }
-        });
-        navLinks.forEach(link => {
-            link.style.color = link.getAttribute('href') === '#' + current
-                ? 'var(--primary)'
-                : '';
-        });
-    });
+function openLb(src) {
+  lbImg.src = src;
+  lb.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLb() {
+  lb.classList.remove('open');
+  document.body.style.overflow = '';
+  lbImg.src = '';
+}
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLb(); });
 </script>
+
 </body>
 </html>
