@@ -445,7 +445,10 @@ nav, main, footer, .mobile-overlay { position: relative; z-index: 2; }
 <!-- ══════ NAV ══════ -->
 <nav class="sticky top-0 z-50 border-b border-olive/20" style="background:rgba(242,234,217,.9);backdrop-filter:blur(14px)">
   <div class="max-w-5xl mx-auto px-5 h-16 flex items-center justify-between">
-    <a href="#top" class="f-serif text-xl font-bold tracking-tight" dir="rtl" style="letter-spacing:-.01em">גולדמן אריה <span class="blink"></span></a>
+    <a href="#top" class="flex flex-col items-end leading-tight" dir="rtl">
+      <span class="f-mono" style="font-size:8px;color:var(--mocha);letter-spacing:.1em">בס״ד</span>
+      <span class="f-serif text-xl font-bold tracking-tight" style="letter-spacing:-.01em">גולדמן אריה <span class="blink"></span></span>
+    </a>
     <div class="hidden md:flex items-center gap-8">
       <a href="#about"      class="nav-link">אודות</a>
       <a href="#experience" class="nav-link">ניסיון</a>
